@@ -8,7 +8,7 @@ typedef enum {COPAS, ESPADADAS, OUROS, PAUS} Naipe;
 
 typedef enum {CIMA, BAIXO} Posicao;
 
-unsigned valor = {'A',2,3,4,5,6,7,8,9,10,'J','Q','K'};
+unsigned valor[13] = {'A',2,3,4,5,6,7,8,9,10,'J','Q','K'};
 
 // Naipe e valor são const
 typedef struct {
@@ -17,9 +17,10 @@ typedef struct {
     Posicao posi;
 }Carta;
 
-Criar_carta(Carta *carta, Naipe naipe, unsigned valor, Posicao posi);
-Naipe__retorna(Carta *carta);
-Valor__retorna(Carta *carta);
-Posicao__retorna(Carta *carta);
+void Criar_carta(Carta *carta, Naipe naipe, unsigned valor, Posicao posi);
+
+Naipe Naipe__retorna(Carta *carta);
+unsigned Valor__retorna(Carta *carta);
+Posicao Posicao__retorna(Carta *carta);
 
 #endif
