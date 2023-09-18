@@ -22,8 +22,9 @@ void Criar_carta(Carta *carta, Naipe naipe, unsigned valor, Posicao posi);
 Naipe Naipe__retorna(Carta *carta);
 unsigned Valor__retorna(Carta *carta);
 Posicao Posicao__retorna(Carta *carta);
-int seq_retorna(Carta *c1,Carta *c2);
-int 
+int seqNaipe_retorna(Carta *c1,Carta *c2);
+int seqAlt_retorna(Carta *c1, Carta *c2);
+void exibe_carta(Carta *c);
 
 
 #endif
