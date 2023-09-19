@@ -2,10 +2,17 @@
 void inicializar_valor(val *valor,int *valores){
     char buffer[64];
     valores= valor->valores;
+    val *v2;
     for(int i=0;i<valores;i++){
         valor->v=(val*)malloc(sizeof(val));
         scanf(" %[^\n]", buffer);
         valor->v=buffer;
+        valor->p=v2->p;
+        if (v2->p==valor->p)
+        {
+            v2->p==NULL;
+        }
+        
 
     }
 
@@ -36,13 +43,15 @@ de mesmo naipe para a primeira carta. Obs.: se a primeira carta é nula, então 
 válido para a segunda carta é um Ás;
 */
 int seqNaipe_retorna(Carta *c1,Carta *c2){
+    
     if(c1->naipe==COPAS && c2->naipe==OUROS 
     || c1->naipe==ESPADADAS && c2->naipe==PAUS 
     || c1->naipe==OUROS && c2->naipe==COPAS
     || c1->naipe==PAUS && c2->naipe==ESPADADAS
     || c1->naipe==c2->naipe
-    //|| c1->naipe == NULL && c2->valor == 'A')//mesmo problema de acesso ao valor das cartas criadas
-     ) {
+   // || c1->naipe == NULL && c2->valor == 'A')//mesmo problema de acesso ao valor das cartas criadas
+    )
+      {
         return 0;
     }
     else return 1;
