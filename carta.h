@@ -11,31 +11,40 @@ typedef enum {COPAS, ESPADADAS, OUROS, PAUS} Naipe;
 
 typedef enum {CIMA, BAIXO} Posicao;
 
-typedef struct 
-{
-    int v;//valor da carta
-    struct valor *p;//ponteiro pro proximo valor
-    int tam;//quantidade para o tamanho da lista encadeada que vai armazenar os 13 valores
-}val;
+typedef enum {
+    AS=1,
+    DOIS,
+    TRES,
+    QUATRO,
+    CINCO,
+    SEIS,
+    SETE,
+    OITO,
+    NOVE,
+    DEZ,
+    VALETE,
+    DAMA,
+    REI
+} ValorCarta;
 
 //unsigned valor[13] = {'A',2,3,4,5,6,7,8,9,10,'J','Q','K'};
 
 // Naipe e valor são const
 typedef struct {
     Naipe naipe;
-    val valor;
+    ValorCarta valor;
     Posicao posi;
 }Carta;
 
-void Criar_carta(Carta *carta, Naipe naipe, val valor, Posicao posi);
+void Criar_carta(Carta *carta, Naipe naipe, ValorCarta valor, Posicao posi);
 
 Naipe Naipe__retorna(Carta *carta);
-val Valor__retorna(Carta *carta);
+ValorCarta Valor__retorna(Carta *carta);
 Posicao Posicao__retorna(Carta *carta);
 int seqNaipe_retorna(Carta *c1,Carta *c2);
 int seqAlt_retorna(Carta *c1, Carta *c2);
 void exibe_carta(Carta *c);
-void inicializar_valor(val *lista_valores,int tam);
+void inicializar_valor(ValorCarta *lista_valores,int tam);
 
 
 #endif

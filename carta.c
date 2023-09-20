@@ -1,18 +1,7 @@
 #include "carta.h"
-void inicializar_valor(val *lista_valores,int tam){
-    char buffer[64];
-    tam= lista_valores->tam;
-    lista_valores-> v= (val*)malloc(tam*sizeof(val));
-
-}
-void inserir_valor(val *lista_valores,int v){
-    
-
-    
 
 
-}
-void Criar_carta(Carta *carta, Naipe naipe, val valor, Posicao posi){
+void Criar_carta(Carta *carta, Naipe naipe, ValorCarta valor, Posicao posi){
     carta->naipe = naipe;
     carta->valor = valor;
     carta->posi = posi;
@@ -23,7 +12,7 @@ Naipe Naipe__retorna(Carta *carta){
     return carta->naipe;
 }
 
-val Valor__retorna(Carta *carta){
+ValorCarta Valor__retorna(Carta *carta){
     return carta->valor;
 }
 
@@ -37,13 +26,18 @@ de mesmo naipe para a primeira carta. Obs.: se a primeira carta é nula, então 
 válido para a segunda carta é um Ás;
 */
 int seqNaipe_retorna(Carta *c1,Carta *c2){
+    if (c1->valor==NULL){
+        if (c2->valor=AS)
+        {
+            return 1;
+        }
     
+    } 
     if(c1->naipe==COPAS && c2->naipe==OUROS 
     || c1->naipe==ESPADADAS && c2->naipe==PAUS 
     || c1->naipe==OUROS && c2->naipe==COPAS
     || c1->naipe==PAUS && c2->naipe==ESPADADAS
     || c1->naipe==c2->naipe
-   // || c1->naipe == NULL && c2->valor == 'A')//mesmo problema de acesso ao valor das cartas criadas
     )
       {
         return 0;
@@ -59,7 +53,15 @@ valor válido para a segunda carta é um Rei;
 int seqAlt_retorna(Carta *c1,Carta *c2){
     while (seqNaipe_retorna(c1,c2))
     {
-       // if (*c1->valor->v < *c2->valor->v)//como acessar os valores das cartas criadas
+        if (c1->valor=NULL)
+        {
+        if(c2->valor=REI){
+            return 1;
+        }
+           return 0;
+        }
+        
+        if (c1->valor<c2->valor)//como acessar os valores das cartas criadas
         {
             return 1;
         }
