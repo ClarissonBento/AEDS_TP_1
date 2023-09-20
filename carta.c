@@ -19,6 +19,15 @@ ValorCarta Valor__retorna(Carta *carta){
 Posicao Posicao__retorna(Carta *carta){
     return carta->posi;
 }
+//FUNCAO ATERAR SEQUENCIA
+void alterar_pos(Carta *carta,int pos){
+    carta->posi=pos;
+
+}
+
+
+
+
 /*
 Verificar sequência de mesmo naipe: recebe duas cartas como parâmetro, e retorna
 verdadeiro caso a segunda carta seja adequada como próxima carta numa sequência
@@ -55,7 +64,7 @@ int seqAlt_retorna(Carta *c1,Carta *c2){
     {
         if (c1->valor=NULL)
         {
-        if(c2->valor=REI){
+        if(c2->valor=K){
             return 1;
         }
            return 0;
