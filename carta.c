@@ -1,23 +1,17 @@
 #include "carta.h"
-void inicializar_valor(val *valor,int *valores){
+void inicializar_valor(val *lista_valores,int tam){
     char buffer[64];
-    valores= valor->valores;
-    val *v2;
-    for(int i=0;i<valores;i++){
-        valor->v=(val*)malloc(sizeof(val));
-        scanf(" %[^\n]", buffer);
-        valor->v=buffer;
-        valor->p=v2->p;
-        if (v2->p==valor->p)
-        {
-            v2->p==NULL;
-        }
-        
-
-    }
+    tam= lista_valores->tam;
+    lista_valores-> v= (val*)malloc(tam*sizeof(val));
 
 }
+void inserir_valor(val *lista_valores,int v){
+    
 
+    
+
+
+}
 void Criar_carta(Carta *carta, Naipe naipe, val valor, Posicao posi){
     carta->naipe = naipe;
     carta->valor = valor;
