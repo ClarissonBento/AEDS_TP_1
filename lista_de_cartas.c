@@ -3,24 +3,26 @@
 void criarBaralho(baralho *b){
     b->Pprimeiro= (apontador)malloc(sizeof(baralho));
     b->Pultimo=b->Pprimeiro;
-    b->prox=NULL;
+    b->Pultimo->Proximo=NULL;
 }
 int retornaTamanho(baralho *b){
     int tam=0;
-    while (b->prox!=NULL)
-    {
-        tam++;
+    apontador aux = b->Pprimeiro->Proximo;
+    int quantidade = 0;
+    while (aux!=NULL){
+        quantidade++;
+        aux = aux->Proximo;
     }
     return tam;
 }
-int taVazia(baralho *b){
-    if (b->prox==NULL)
+/*int taVazia(baralho *b){
+    if (b->Proximo == NULL)
     {
         return 0;
     }
     else return 1;
     
-}
+}/*
 /*Carta retornarTopo(baralho *b){
     Carta topo = *(b->Pprimeiro);
     return topo;
@@ -29,3 +31,11 @@ retornarPosCarta(baralho *b,Carta *carta){
 
 
 }*/
+
+  /* void RetornaPosCarta(baralho *b, int posi){
+        apontador aux = baralho->Pprimeiro->Pproximo
+    
+    
+    
+    }*/
+

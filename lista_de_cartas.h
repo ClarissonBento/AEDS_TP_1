@@ -3,13 +3,17 @@
 #include "carta.h"
 typedef struct celula* apontador;
 //definicao da celula da lista(baralho)
-typedef struct 
-{
-    Carta *carta;
-    apontador *prox;
-    apontador *Pprimeiro;
-    apontador *Pultimo;
+typedef struct celula{
+    Carta carta;
+    struct celula *Proximo;
+}celula;
+
+typedef struct{
+    apontador Pprimeiro;
+    apontador Pultimo;
+
 }baralho;
+
 void criarBaralho(baralho *b);//inicializa a lista vazia
 int retornaTamanho(baralho *b);//retorna o tamanho
 int taVazia (baralho* b);// le se está vazio

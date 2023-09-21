@@ -46,6 +46,4 @@ int seqNaipe_retorna(Carta *c1,Carta *c2);
 int seqAlt_retorna(Carta *c1, Carta *c2);
 void exibe_carta(Carta *c);
 
-
-
 #endif
