@@ -1,7 +1,7 @@
 #include "lista_de_cartas.h"
 //criar o baralho vazio
 void criarBaralho(baralho *b){
-   b->Pprimeiro=(apontador)malloc(sizeof(celula));
+   b->Pprimeiro=(apontador)malloc(sizeof(Celula));
    b->Pultimo=b->Pprimeiro;
    b->Pprimeiro->Proximo=NULL;
 
@@ -37,6 +37,18 @@ int retornarPosCarta(baralho *b,Carta *carta){
     return pos;
 
 }
+//add carta ao topo
+void addTopo(baralho *b,Carta *carta){
+    b->Pultimo->Proximo=(apontador)malloc(sizeof(Celula));
+    b->Pultimo=b->Pultimo->Proximo;
+    b->Pultimo->carta=*carta;
+    b->Pultimo->Proximo=NULL;
+}
+//remover do topo
+void retiraTopo(baralho *b,Carta *carta){
+    
 
-  
+
+}
+
 
