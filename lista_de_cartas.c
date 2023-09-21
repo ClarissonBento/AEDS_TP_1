@@ -1,41 +1,42 @@
 #include "lista_de_cartas.h"
 //criar o baralho vazio
 void criarBaralho(baralho *b){
-    b->Pprimeiro= (apontador)malloc(sizeof(baralho));
-    b->Pultimo=b->Pprimeiro;
-    b->Pultimo->Proximo=NULL;
+   b->Pprimeiro=(apontador)malloc(sizeof(celula));
+   b->Pultimo=b->Pprimeiro;
+   b->Pprimeiro->Proximo=NULL;
+
 }
 int retornaTamanho(baralho *b){
-    int tam=0;
     apontador aux = b->Pprimeiro->Proximo;
     int quantidade = 0;
     while (aux!=NULL){
         quantidade++;
         aux = aux->Proximo;
     }
-    return tam;
+    return quantidade;
 }
-/*int taVazia(baralho *b){
-    if (b->Proximo == NULL)
+int taVazia(baralho *b){
+    if ( b->Pprimeiro=b->Pultimo)
     {
-        return 0;
+        return 1;
+
     }
-    else return 1;
+    else return 0;
     
-}/*
-/*Carta retornarTopo(baralho *b){
-    Carta topo = *(b->Pprimeiro);
+    
+    
+}
+Carta retornarTopo(baralho *b){
+    Carta topo;
+    topo=b->Pprimeiro->carta;
     return topo;
 }
-retornarPosCarta(baralho *b,Carta *carta){
+int retornarPosCarta(baralho *b,Carta *carta){
+    int pos;
+    pos = b->Pprimeiro->Proximo;
+    return pos;
 
+}
 
-}*/
-
-  /* void RetornaPosCarta(baralho *b, int posi){
-        apontador aux = baralho->Pprimeiro->Pproximo
-    
-    
-    
-    }*/
+  
 
