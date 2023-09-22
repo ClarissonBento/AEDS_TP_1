@@ -4,8 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
+#include <stdbool.h>
 
-
+// bool posicao;
 
 typedef enum {COPAS, ESPADADAS, OUROS, PAUS} Naipe;
 
@@ -27,9 +28,7 @@ typedef enum {
     K
 } ValorCarta;
 
-
-
-// Naipe e valor são const
+// Naipe e valor devem ser valores constantes
 typedef struct {
     Naipe naipe;
     ValorCarta valor;
@@ -37,11 +36,10 @@ typedef struct {
 }Carta;
 
 void Criar_carta(Carta *carta, Naipe naipe, ValorCarta valor, Posicao posi);
-
 Naipe Naipe__retorna(Carta *carta);
 ValorCarta Valor__retorna(Carta *carta);
 Posicao Posicao__retorna(Carta *carta);
-void alterar_pos(Carta *carta,int pos);
+void alterar_pos(Carta *carta, int pos);
 int seqNaipe_retorna(Carta *c1,Carta *c2);
 int seqAlt_retorna(Carta *c1, Carta *c2);
 void exibe_carta(Carta *c);

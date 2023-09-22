@@ -19,14 +19,11 @@ ValorCarta Valor__retorna(Carta *carta){
 Posicao Posicao__retorna(Carta *carta){
     return carta->posi;
 }
-//FUNCAO ATERAR SEQUENCIA
-void alterar_pos(Carta *carta,int pos){
-    carta->posi=pos;
 
+//FUNCAO ALTERAR SEQUENCIA
+void alterar_pos(Carta *carta, int posi){
+    carta->posi = posi;
 }
-
-
-
 
 /*
 Verificar sequência de mesmo naipe: recebe duas cartas como parâmetro, e retorna
