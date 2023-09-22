@@ -41,14 +41,33 @@ int PosCarta__retorna(Lista_cartas *lista, Carta *carta){
     return pos;
 }
 
-// add carta ao topo, inserção no final da lista
-void Topo_adiciona(Lista_cartas *lista, Carta *carta){
+// --------------------------------------------------------------------------------- //
+// Aqui preciamos decidir se a inserção vai ser feita no inicio da lista ou no final,
+// aparentemente a inserção e remoção no inicio da lista é mais eficiente.
+// Vamos conversar sobre essa decisão quando possível, mas por enquanto deixei uma função
+// que adiciona no inicio da lista e deixei a no final da lista como comentário.
+// ----------------------------------------------------------------------------------//
+
+void Topo__adiciona(Lista_cartas *lista, Carta *carta){
+
+    Celula *nova_celula = (Celula *)malloc(sizeof(Celula));
+
+    // Configura a nova celula
+    nova_celula->carta = *carta;
+    nova_celula->proximo = lista->P_primeiro;
+    
+    // Atualiza o ponteiro que mantem o inicio da lista
+    lista->P_primeiro = nova_celula;
+}
+
+/*void Topo_adiciona(Lista_cartas *lista, Carta *carta){
     lista->P_ultimo->proximo = (Apontador)malloc(sizeof(Celula));
     lista->P_ultimo = lista->P_ultimo->proximo;
     lista->P_ultimo->carta = *carta;
     lista->P_ultimo->proximo = NULL;
-}
+}*/
 
+// Remoção no inicio da lista
 void Topo__remove(Lista_cartas *lista, Carta *carta){
     // Verifica se a lista está vazia
     if (lista->P_primeiro == NULL || lista->P_primeiro->proximo == NULL) {

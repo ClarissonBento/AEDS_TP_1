@@ -35,6 +35,8 @@ typedef struct {
     Posicao posi;
 }Carta;
 
+// Cabeçalho de funções
+// ----------------------------------------------------------------------------------//
 void Criar_carta(Carta *carta, Naipe naipe, ValorCarta valor, Posicao posi);
 Naipe Naipe__retorna(Carta *carta);
 ValorCarta Valor__retorna(Carta *carta);
@@ -43,5 +45,6 @@ void alterar_pos(Carta *carta, int pos);
 int seqNaipe_retorna(Carta *c1,Carta *c2);
 int seqAlt_retorna(Carta *c1, Carta *c2);
 void exibe_carta(Carta *c);
+// ----------------------------------------------------------------------------------//
 
 #endif
