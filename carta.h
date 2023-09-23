@@ -6,11 +6,10 @@
 #include <malloc.h>
 #include <stdbool.h>
 
-// bool posicao;
-
 typedef enum {COPAS, ESPADADAS, OUROS, PAUS} Naipe;
 
-typedef enum {CIMA, BAIXO} Posicao;
+// bool posicao;
+typedef enum {BAIXO, CIMA} Posicao; // Baixo = 0, Cima = 1
 
 typedef enum {
     AS=1,
@@ -32,16 +31,16 @@ typedef enum {
 typedef struct {
     Naipe naipe;
     ValorCarta valor;
-    Posicao posi;
+    Posicao posicao;
 }Carta;
 
 // Cabeçalho de funções
 // ----------------------------------------------------------------------------------//
-void Criar_carta(Carta *carta, Naipe naipe, ValorCarta valor, Posicao posi);
+void Carta__cria(Carta *carta, Naipe naipe, ValorCarta valor, Posicao posicao);
 Naipe Naipe__retorna(Carta *carta);
 ValorCarta Valor__retorna(Carta *carta);
 Posicao Posicao__retorna(Carta *carta);
-void alterar_pos(Carta *carta, int pos);
+void Posicao__alterar(Carta *carta);
 int seqNaipe_retorna(Carta *c1,Carta *c2);
 int seqAlt_retorna(Carta *c1, Carta *c2);
 void exibe_carta(Carta *c);

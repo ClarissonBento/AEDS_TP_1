@@ -1,10 +1,10 @@
 #include "carta.h"
 
 
-void Criar_carta(Carta *carta, Naipe naipe, ValorCarta valor, Posicao posi){
+void Carta__cria(Carta *carta, Naipe naipe, ValorCarta valor, Posicao posicao){
     carta->naipe = naipe;
     carta->valor = valor;
-    carta->posi = posi;
+    carta->posicao = posicao;
 }
 
 // FUNÇÕES QUE RETORNAM VALORES (GET)
@@ -17,12 +17,15 @@ ValorCarta Valor__retorna(Carta *carta){
 }
 
 Posicao Posicao__retorna(Carta *carta){
-    return carta->posi;
+    return carta->posicao;
 }
 
-//FUNCAO ALTERAR SEQUENCIA
-void alterar_pos(Carta *carta, int posi){
-    carta->posi = posi;
+// Função que altera a posicão da carta, se está para baixo, coloca para cima
+void Posicao__alterar(Carta *carta){
+    if (carta->posicao == BAIXO)
+    {
+        carta->posicao = CIMA;
+    }
 }
 
 /*
@@ -31,6 +34,7 @@ verdadeiro caso a segunda carta seja adequada como próxima carta numa sequênci
 de mesmo naipe para a primeira carta. Obs.: se a primeira carta é nula, então o valor
 válido para a segunda carta é um Ás;
 */
+
 int seqNaipe_retorna(Carta *c1,Carta *c2){
     if (c1->valor==NULL){
         if (c2->valor=AS)
@@ -50,12 +54,14 @@ int seqNaipe_retorna(Carta *c1,Carta *c2){
     }
     else return 1;
 }
+
 /*
 Verificar sequência alternada: recebe duas cartas como parâmetro, e retorna
 verdadeiro caso a segunda carta seja adequada como próxima carta numa sequência
 de cores alternadas para a primeira carta. Obs.: se a primeira carta é nula, então o
 valor válido para a segunda carta é um Rei;
 */
+
 int seqAlt_retorna(Carta *c1,Carta *c2){
     while (seqNaipe_retorna(c1,c2))
     {
@@ -76,10 +82,11 @@ int seqAlt_retorna(Carta *c1,Carta *c2){
     }
     
 }
+
 void exibe_carta(Carta *c){
-    if(c->posi=="CIMA"){
+    if(c->posicao=="CIMA"){
     printf("O naipe da carta eh: %s\n",c->naipe);
     printf("O valor da carta eh: %s\n",c->valor);
-    printf("Sua posicao eh %s\n",c->posi);
+    printf("Sua posicao eh %s\n",c->posicao);
     }
 }

@@ -12,8 +12,8 @@ typedef struct celula{
 }Celula;
 
 typedef struct{
-    Apontador P_primeiro;
-    Apontador P_ultimo;
+    Apontador p_Primeiro;
+    Apontador p_Ultimo;
 }Lista_cartas;
 
 // Cabeçalho de funções
@@ -23,8 +23,9 @@ int Tamanho__retorna(Lista_cartas *lista);
 int taVazia(Lista_cartas *lista);
 Carta Topo__retorna(Lista_cartas *lista);
 int PosCarta__retorna(Lista_cartas *lista, Carta *carta);
-void Topo_adiciona(Lista_cartas *lista, Carta *carta);
+void Topo__adiciona(Lista_cartas *lista, Carta *carta);
 void Topo__remove(Lista_cartas *lista, Carta *carta);
+void Cartas__transfere(Lista_cartas *lista_origem, Lista_cartas *lista_destino, int quantidade);
 // ----------------------------------------------------------------------------------//
 
 #endif
