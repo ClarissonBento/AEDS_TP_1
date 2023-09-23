@@ -8,8 +8,8 @@
 
 void ListaVazia__cria(Lista_cartas *lista){
    lista->p_Primeiro = (Apontador)malloc(sizeof(Celula));
-   lista->p_Ultimo = lista->p_Primeiro;
    lista->p_Primeiro->proximo = NULL;
+   lista->p_Ultimo = lista->p_Primeiro;
 }
 
 int Tamanho__retorna(Lista_cartas *lista){
@@ -52,7 +52,6 @@ void Topo__adiciona(Lista_cartas *lista, Carta *carta){
 
     Celula *nova_celula = (Celula *)malloc(sizeof(Celula));
 
-    // Configura a nova celula
     nova_celula->carta = *carta;
     nova_celula->proximo = lista->p_Primeiro;
     
@@ -69,20 +68,17 @@ void Topo__adiciona(Lista_cartas *lista, Carta *carta){
 
 // Remoção no inicio da lista
 void Topo__remove(Lista_cartas *lista, Carta *carta){
-    // Verifica se a lista está vazia
+
     if (lista->p_Primeiro == NULL || lista->p_Primeiro->proximo == NULL) {
         printf("A lista está vazia.\n"); // Tirar isso daqui depois, só pra ficar mais visual caso a gnt teste
         return 0;
     }
     
-    // Guarda o elemento do topo
     Celula *celula_removida = lista->p_Primeiro->proximo;
     *carta = celula_removida->carta;
 
-    // Atualiza o primeiro elemento da lista
     lista->p_Primeiro->proximo = celula_removida->proximo;
 
-    // Libera a memoria da celula removida
     free(celula_removida);
 }
 
@@ -113,14 +109,60 @@ void Cartas__transfere(Lista_cartas *lista_origem, Lista_cartas *lista_destino, 
         }
     }
 
-    // Atualiza o ponteiro da lista de origem para apontar para o nó após o último transferido
     lista_origem->p_Primeiro->proximo = celula_origem;
 
     //printf("Transferência de cartas concluída\n");
 }
 
-void ListaCartas__embaralha(){
+// Função para embaralhar uma lista de cartas
+void ListaCartas__embaralha(Lista_cartas *lista) {
+    int quantidade = Tamanho__retorna(lista); // Passo 1
 
+    if (quantidade <= 1) {
+        return; // Não há cartas suficientes para embaralhar
+    }
+
+    // Passo 2: Gere uma ordem aleatória para os índices das cartas
+    int *indices = (int *)malloc(quantidade * sizeof(int));
+    for (int i = 0; i < quantidade; i++) {
+        indices[i] = i;
+    }
+
+    srand(time(NULL)); // Inicializa a semente aleatória
+    for (int i = quantidade - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        int temp = indices[i];
+        indices[i] = indices[j];
+        indices[j] = temp;
+    }
+
+    // Passo 3: Reorganize as cartas na lista de acordo com a ordem aleatória
+    Celula *cartas_ordenadas = lista->p_Primeiro->proximo;
+    Celula *cartas_embaralhadas = NULL;
+
+    for (int i = 0; i < quantidade; i++) {
+        int indice = indices[i];
+        
+        // Encontre a carta com o índice correto na lista original
+        while (indice > 0 && cartas_ordenadas != NULL) {
+            cartas_ordenadas = cartas_ordenadas->proximo;
+            indice--;
+        }
+
+        // Adicione a carta na lista de cartas embaralhadas
+        if (cartas_ordenadas != NULL) {
+            Celula *nova_celula = (Celula *)malloc(sizeof(Celula));
+            nova_celula->carta = cartas_ordenadas->carta;
+            nova_celula->proximo = cartas_embaralhadas;
+            cartas_embaralhadas = nova_celula;
+        }
+    }
+
+    // Atualize a lista original para conter as cartas embaralhadas
+    lista->p_Primeiro->proximo = cartas_embaralhadas;
+
+    // Libere a memória alocada para o array de índices
+    free(indices);
 }
 
 void ListaCartas__exibe(){

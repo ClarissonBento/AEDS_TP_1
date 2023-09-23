@@ -28,7 +28,7 @@ typedef enum {
     K
 } ValorCarta;
 
-// Naipe e valor devem ser valores constantes
+// Naipe e valor devem ser valores constantes (mas ainda não são)
 typedef struct {
     Naipe naipe;
     ValorCarta valor;
