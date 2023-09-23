@@ -118,3 +118,11 @@ void Cartas__transfere(Lista_cartas *lista_origem, Lista_cartas *lista_destino, 
 
     //printf("Transferência de cartas concluída\n");
 }
+
+void ListaCartas__embaralha(){
+
+}
+
+void ListaCartas__exibe(){
+
+}

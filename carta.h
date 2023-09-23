@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
+#include <time.h>
 #include <stdbool.h>
 
 typedef enum {COPAS, ESPADADAS, OUROS, PAUS} Naipe;
