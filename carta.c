@@ -23,7 +23,7 @@ Posicao Posicao__retorna(Carta *carta){
 
 // Função que altera a posicão da carta, se está para baixo, coloca para cima
 void Posicao__alterar(Carta *carta){
-    if (carta->posicao == BAIXO)
+   if (carta->posicao == BAIXO)
     {
         carta->posicao = CIMA;
     }
@@ -38,7 +38,7 @@ válido para a segunda carta é um Ás;
 
 int seqNaipe_retorna(Carta *c1,Carta *c2){
     if (c1->valor==NULL){
-        if (c2->valor=AS)
+        if (c1->valor == AS)
         {
             return 1;
         }
@@ -66,7 +66,7 @@ valor válido para a segunda carta é um Rei;
 int seqAlt_retorna(Carta *c1,Carta *c2){
     while (seqNaipe_retorna(c1,c2))
     {
-        if (c1->valor=NULL)
+        if (c1->valor == NULL)
         {
         if(c2->valor=K){
             return 1;
@@ -85,9 +85,14 @@ int seqAlt_retorna(Carta *c1,Carta *c2){
 }
 
 void exibe_carta(Carta *c){
-    if(c->posicao=="CIMA"){
+    if(c->posicao=="CIMA"){//comparar usando strcmp tem q implementar
     printf("O naipe da carta eh: %s\n",c->naipe);
     printf("O valor da carta eh: %s\n",c->valor);
-    printf("Sua posicao eh %s\n",c->posicao);
+    printf("Sua posicao eh %d\n",c->posicao);
     }
+    else
+    {
+        printf("A carta esta virada para baixo");
+    }
+    
 }
