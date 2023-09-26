@@ -25,8 +25,10 @@ int Tamanho__retorna(Lista_cartas *lista){
 }
 
 int taVazia(Lista_cartas *lista){
-    if (lista->p_Primeiro = lista->p_Ultimo) return 1;
-    else return 0;
+    if (lista->p_Primeiro == lista->p_Ultimo)
+        return 1;
+    else
+        return 0;
 }
 
 Carta Topo__retorna(Lista_cartas *lista){
@@ -36,11 +38,17 @@ Carta Topo__retorna(Lista_cartas *lista){
 }
 
 int PosCarta__retorna(Lista_cartas *lista, Carta *carta){
-    int pos;
-    pos = lista->p_Primeiro->proximo;
-    return pos;
+    Apontador atual = lista->p_Primeiro->proximo;
+    int pos = 1;
+    while (atual != NULL) {
+        if (&atual->carta == carta) {
+            return pos;
+        }
+        atual = atual->proximo;
+        pos++;
+    }
+    return -1; // Retorna -1 se a carta não for encontrada
 }
-
 // --------------------------------------------------------------------------------- //
 // Aqui preciamos decidir se a inserção vai ser feita no inicio da lista ou no final,
 // aparentemente a inserção e remoção no inicio da lista é mais eficiente.
@@ -59,19 +67,14 @@ void Topo__adiciona(Lista_cartas *lista, Carta *carta){
     lista->p_Primeiro = nova_celula;
 }
 
-/*void Topo_adiciona(Lista_cartas *lista, Carta *carta){
-    lista->P_ultimo->proximo = (Apontador)malloc(sizeof(Celula));
-    lista->P_ultimo = lista->P_ultimo->proximo;
-    lista->P_ultimo->carta = *carta;
-    lista->P_ultimo->proximo = NULL;
-}*/
+
 
 // Remoção no inicio da lista
 void Topo__remove(Lista_cartas *lista, Carta *carta){
 
     if (lista->p_Primeiro == NULL || lista->p_Primeiro->proximo == NULL) {
         printf("A lista está vazia.\n"); // Tirar isso daqui depois, só pra ficar mais visual caso a gnt teste
-        return 0;
+        
     }
     
     Celula *celula_removida = lista->p_Primeiro->proximo;
