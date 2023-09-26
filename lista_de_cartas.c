@@ -6,24 +6,23 @@
 // Mudei o nome de "baralho" pra "lista" porque vamos precisar da palavra depois
 // ----------------------------------------------------------------------------------//
 
-void ListaVazia__cria(Lista_cartas *lista){
-   lista->p_Primeiro = (Apontador)malloc(sizeof(Celula));
-   lista->p_Primeiro->proximo = NULL;
-   lista->p_Ultimo = lista->p_Primeiro;
+void ListaVazia__cria(Lista_cartas *lista) {
+    lista->p_Primeiro = NULL;
+    lista->p_Ultimo = NULL;
 }
 
-int Tamanho__retorna(Lista_cartas *lista){
-    Apontador aux = lista->p_Primeiro->proximo;
-
+int Tamanho__retorna(Lista_cartas *lista) {
+    Apontador atual = lista->p_Primeiro;
     int quantidade = 0;
-    while (aux != NULL){
+
+    while (atual != NULL) {
         quantidade++;
-        aux = aux->proximo;
+        atual = atual->proximo;
     }
 
     return quantidade;
 }
-
+//
 int taVazia(Lista_cartas *lista){
     if (lista->p_Primeiro == lista->p_Ultimo)
         return 1;
@@ -56,65 +55,70 @@ int PosCarta__retorna(Lista_cartas *lista, Carta *carta){
 // que adiciona no inicio da lista e deixei a no final da lista como comentário.
 // ----------------------------------------------------------------------------------//
 
-void Topo__adiciona(Lista_cartas *lista, Carta *carta){
+void Topo__adiciona(Lista_cartas *lista, Carta *carta) {
+    Apontador nova_celula = (Apontador)malloc(sizeof(Celula));
 
-    Celula *nova_celula = (Celula *)malloc(sizeof(Celula));
+    if (nova_celula == NULL) {
+        printf("Erro ao alocar memória para a célula.\n");
+        exit(1);
+    }
 
     nova_celula->carta = *carta;
     nova_celula->proximo = lista->p_Primeiro;
-    
-    // Atualiza o ponteiro que mantem o inicio da lista
+
+    if (lista->p_Ultimo == NULL) {
+        lista->p_Ultimo = nova_celula;
+    }
+
     lista->p_Primeiro = nova_celula;
 }
 
 
 
 // Remoção no inicio da lista
-void Topo__remove(Lista_cartas *lista, Carta *carta){
-
-    if (lista->p_Primeiro == NULL || lista->p_Primeiro->proximo == NULL) {
-        printf("A lista está vazia.\n"); // Tirar isso daqui depois, só pra ficar mais visual caso a gnt teste
-        
+void Topo__remove(Lista_cartas *lista, Carta *carta) {
+    if (lista->p_Primeiro == NULL) {
+        printf("A lista está vazia.\n");
+        return;
     }
-    
-    Celula *celula_removida = lista->p_Primeiro->proximo;
+
+    Apontador celula_removida = lista->p_Primeiro;
     *carta = celula_removida->carta;
 
-    lista->p_Primeiro->proximo = celula_removida->proximo;
+    lista->p_Primeiro = celula_removida->proximo;
 
     free(celula_removida);
 }
 
 // Não sei se isso tá certo KKKKKKK
 void Cartas__transfere(Lista_cartas *lista_origem, Lista_cartas *lista_destino, int quantidade) {
-
-    if (lista_origem->p_Primeiro->proximo == NULL || quantidade <= 0) {
+    if (lista_origem->p_Primeiro == NULL || quantidade <= 0) {
         printf("Falhou com sucesso.\n");
-        return 0;
+        return;
     }
 
-    Celula *celula_origem = lista_origem->p_Primeiro->proximo;
-    Celula *celula_destino = lista_destino->p_Primeiro;
+    Apontador celula_origem = lista_origem->p_Primeiro;
 
-    while (celula_origem != NULL && celula_origem->proximo != NULL) {
-        celula_origem = celula_origem->proximo;
-    }
-
-    // Transfere as cartas da lista de origem para a lista de destino
     for (int i = 0; i < quantidade && celula_origem != NULL; i++) {
-        Celula *nova_celula = (Celula *)malloc(sizeof(Celula));
-        nova_celula->carta = celula_origem->carta;
-        nova_celula->proximo = lista_destino->p_Primeiro->proximo;
-        lista_destino->p_Primeiro->proximo = nova_celula;
+        Apontador nova_celula = (Apontador)malloc(sizeof(Celula));
 
-        if (celula_origem->proximo != NULL) {
-            celula_origem = celula_origem->proximo;
+        if (nova_celula == NULL) {
+            printf("Erro ao alocar memória para a célula.\n");
+            exit(1);
         }
+
+        nova_celula->carta = celula_origem->carta;
+        nova_celula->proximo = lista_destino->p_Primeiro;
+
+        lista_destino->p_Primeiro = nova_celula;
+
+        Apontador celula_removida = celula_origem;
+        celula_origem = celula_origem->proximo;
+
+        free(celula_removida);
     }
 
-    lista_origem->p_Primeiro->proximo = celula_origem;
-
-    //printf("Transferência de cartas concluída\n");
+    lista_origem->p_Primeiro = celula_origem;
 }
 
 // Função para embaralhar uma lista de cartas

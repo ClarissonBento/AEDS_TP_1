@@ -66,7 +66,7 @@ valor válido para a segunda carta é um Rei;
 int seqAlt_retorna(Carta *c1,Carta *c2){
     while (seqNaipe_retorna(c1,c2))
     {
-        if (c1->valor == NULL)
+        if (c1->valor == nao_definido)
         {
         if(c2->valor=K){
             return 1;
