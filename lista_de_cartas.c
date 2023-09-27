@@ -173,5 +173,7 @@ void ListaCartas__embaralha(Lista_cartas *lista) {
 }
 
 void ListaCartas__exibe(){
+    //conversar para ver logica
+    
 
 }
