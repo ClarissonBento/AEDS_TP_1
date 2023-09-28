@@ -3,10 +3,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include <stdbool.h>
 
-typedef enum {COPAS, ESPADADAS, OUROS, PAUS} Naipe;
+typedef enum {COPAS, ESPADAS, OUROS, PAUS} Naipe;
 
 // bool posicao;
 typedef enum {BAIXO, CIMA} Posicao; // Baixo = 0, Cima = 1
@@ -44,7 +45,7 @@ Posicao Posicao__retorna(Carta *carta);
 void Posicao__alterar(Carta *carta);
 int seqNaipe_retorna(Carta *c1,Carta *c2);
 int seqAlt_retorna(Carta *c1, Carta *c2);
-void exibe_carta(Carta *c);
+void Carta__exibe(Carta *c);
 // ----------------------------------------------------------------------------------//
 
 #endif

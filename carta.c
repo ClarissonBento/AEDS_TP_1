@@ -37,7 +37,7 @@ válido para a segunda carta é um Ás;
 */
 
 int seqNaipe_retorna(Carta *c1,Carta *c2){
-    if (c1->valor==NULL){
+    if (c1->valor == nao_definido){
         if (c1->valor == AS)
         {
             return 1;
@@ -45,9 +45,9 @@ int seqNaipe_retorna(Carta *c1,Carta *c2){
     
     } 
     if(c1->naipe==COPAS && c2->naipe==OUROS 
-    || c1->naipe==ESPADADAS && c2->naipe==PAUS 
+    || c1->naipe==ESPADAS && c2->naipe==PAUS 
     || c1->naipe==OUROS && c2->naipe==COPAS
-    || c1->naipe==PAUS && c2->naipe==ESPADADAS
+    || c1->naipe==PAUS && c2->naipe==ESPADAS
     || c1->naipe==c2->naipe
     )
       {
@@ -68,7 +68,7 @@ int seqAlt_retorna(Carta *c1,Carta *c2){
     {
         if (c1->valor == nao_definido)
         {
-        if(c2->valor=K){
+        if(c2->valor = K){
             return 1;
         }
            return 0;
@@ -84,15 +84,20 @@ int seqAlt_retorna(Carta *c1,Carta *c2){
     
 }
 
-void exibe_carta(Carta *c){
-    if(c->posicao=="CIMA"){//comparar usando strcmp tem q implementar
-    printf("O naipe da carta eh: %s\n",c->naipe);
-    printf("O valor da carta eh: %s\n",c->valor);
-    printf("Sua posicao eh %d\n",c->posicao);
-    }
-    else
+void Carta__exibe(Carta *c){
+    char *naipes[] = {"Copas", "Espadas", "Ouros", "Paus"};
+    char *cards[] = {"0","Ás","2","3","4","5","6","7","8","9","10","Valete","Dama","Rei"};
+
+    if(c->posicao == CIMA)
     {
-        printf("A carta esta virada para baixo");
+        printf("%s de %s\n", cards[c->valor], naipes[c->naipe]);
+
+        //printf("O naipe da carta eh: %s\n", naipes[c->naipe]);
+        //printf("O valor da carta eh: %i\n",c->valor);
+        //printf("Sua posicao eh %d\n",c->posicao);
+
+    } else{
+        printf("Carta oculta\n");
     }
     
 }
