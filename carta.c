@@ -1,7 +1,5 @@
 #include "carta.h"
 
-
-
 void Carta__cria(Carta *carta, Naipe naipe, ValorCarta valor, Posicao posicao){
     carta->naipe = naipe;
     carta->valor = valor;
