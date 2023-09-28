@@ -10,6 +10,7 @@ typedef struct {
     Lista_cartas tableau[7];
     int pontos;
 }Mesa;
+
 //inicializar cada uma das listas da mesa
 void inicializa_baralho(Lista_cartas *lista);
 void inicializa_descarte(Lista_cartas *lista);
@@ -26,4 +27,5 @@ void descarte_tableau(Lista_cartas *descarte, Lista_cartas *tableau);
 void tableu_bases(Lista_cartas *tableau, Lista_cartas *bases);
 void bases_tableau(Lista_cartas *bases, Lista_cartas *tableau);
 void mover_colunas(Lista_cartas *pilha_origem,Lista_cartas *pilha_destino,int qtd);//pilha da qual vai ser extraida, quantidade de cartas a ser extraidas e o destino
+
 #endif

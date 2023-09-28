@@ -13,8 +13,8 @@ typedef enum {COPAS, ESPADAS, OUROS, PAUS} Naipe;
 typedef enum {BAIXO, CIMA} Posicao; // Baixo = 0, Cima = 1
 
 typedef enum {
-    nao_definido=-1,
-    AS=1,
+    nao_definido = -1,
+    AS = 1,
     DOIS,
     TRES,
     QUATRO,

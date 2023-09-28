@@ -172,8 +172,13 @@ void ListaCartas__embaralha(Lista_cartas *lista) {
     free(indices);
 }
 
-void ListaCartas__exibe(){
-    //conversar para ver logica
-    
+void ListaCartas__exibe(Lista_cartas *lista) {
+    Apontador atual = lista->p_Primeiro->proximo;
 
+    printf("Cartas na lista:\n");
+
+    while (atual != NULL) {
+        Carta__exibe(&atual->carta);
+        atual = atual->proximo;
+    }
 }
