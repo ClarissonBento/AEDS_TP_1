@@ -26,6 +26,8 @@ int PosCarta__retorna(Lista_cartas *lista, Carta *carta);
 void Topo__adiciona(Lista_cartas *lista, Carta *carta);
 void Topo__remove(Lista_cartas *lista, Carta *carta);
 void Cartas__transfere(Lista_cartas *lista_origem, Lista_cartas *lista_destino, int quantidade);
+void ListaCartas__embaralha(Lista_cartas *lista);
+void ListaCartas__exibe(Lista_cartas *lista);
 // ----------------------------------------------------------------------------------//
 
 #endif

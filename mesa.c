@@ -15,3 +15,23 @@ void Mesa__Inicializa(Mesa *mesa) {
     
     mesa->pontos = 0;
 }
+
+void CarregarBaralho_aleatorio(Mesa *mesa) {
+    Lista_cartas *baralho;
+    
+    int i = 0;
+    for (int naipe = 0; naipe < 4; naipe++) {
+        for (int valor = 1; valor <= 13; valor++) {
+            baralho[i].p_Primeiro->carta.naipe = naipe;
+            baralho[i].p_Primeiro->carta.valor = valor;
+            i++;
+        }
+    }
+
+    // Embaralhando
+    ListaCartas__embaralha(&baralho);
+
+    for (int i = 0; i < 52; i++) {
+        inserir_carta(&mesa->baralho, baralho[i]);
+    }
+}
