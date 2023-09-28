@@ -1,6 +1,6 @@
 #include "mesa.h"
 
-void inicializa_baralho(Mesa *mesa) {
+void Mesa__Inicializa(Mesa *mesa) {
 
     ListaVazia__cria(&mesa->baralho);
     ListaVazia__cria(&mesa->descarte);

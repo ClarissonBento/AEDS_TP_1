@@ -13,7 +13,7 @@ typedef struct {
 }Mesa;
 
 //inicializar cada uma das listas da mesa
-void inicializa_baralho(Mesa *mesa);
+void Mesa__Inicializa(Mesa *mesa);
 void inicializa_descarte(Lista_cartas *lista);
 void inicializa_bases(Lista_cartas *lista[4]);
 void inicializa_tableau(Lista_cartas *lista[7]);//sera q tem q inicializar tudo em uma so funcao?
