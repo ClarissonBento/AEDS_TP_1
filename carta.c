@@ -60,7 +60,7 @@ verdadeiro caso a segunda carta seja adequada como próxima carta numa sequênci
 de cores alternadas para a primeira carta. Obs.: se a primeira carta é nula, então o
 valor válido para a segunda carta é um Rei;
 */
-
+// Carta 2 tá por cima
 int seqAlt_retorna(Carta *c1,Carta *c2){
     while (seqNaipe_retorna(c1,c2))
     {
