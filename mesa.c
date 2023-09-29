@@ -31,8 +31,21 @@ void CarregarBaralho_aleatorio(Mesa *mesa) {
     // Embaralhando
     ListaCartas__embaralha(baralho);
 
+    // Insira as cartas no baralho da mesa
+    for (int i = 0; i < 52; i++) {
+        Topo__adiciona(&baralho[i], &mesa->baralho.p_Primeiro->carta);
+    }
    
 }
+
+// REVISAR
+void CarregarBaralho(Mesa *mesa, Carta cartas[], int num_cartas) {
+    for (int i = 0; i < num_cartas; i++) {
+        // Insira cada carta no baralho da mesa
+        Topo__adiciona(&mesa->baralho, &cartas[i]);
+    }
+}
+
 Carta compra_carta(Lista_cartas *lista){
     if(taVazia(lista)){
         printf("Nao e possivel comprar cartas pois o baralho acabou");

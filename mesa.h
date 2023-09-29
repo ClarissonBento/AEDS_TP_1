@@ -14,7 +14,8 @@ typedef struct {
 
 //inicializar cada uma das listas da mesa
 void Mesa__Inicializa(Mesa *mesa);
-void carregar_baralho(Lista_cartas *lista);
+void CarregarBaralho_aleatorio(Mesa *mesa);
+void CarregarBaralho();
 void inserir_baralho(Lista_cartas *lista);
 void preparar(Lista_cartas *lista);
 //funcao prearar
