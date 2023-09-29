@@ -21,7 +21,7 @@ void preparar(Lista_cartas *lista);
 //funcao vitoria
 Carta compra_carta(Lista_cartas *lista);
 void descarte_base_mover(Lista_cartas *descarte,Lista_cartas *bases);
-void descarte_tableau(Lista_cartas *descarte, Lista_cartas *tableau);
+void descarte_tableau(Mesa *mesa,int indice_tb);
 void tableu_bases(Lista_cartas *tableau, Lista_cartas *bases);
 void bases_tableau(Lista_cartas *bases, Lista_cartas *tableau);
 void mover_colunas(Lista_cartas *pilha_origem,Lista_cartas *pilha_destino,int qtd);//pilha da qual vai ser extraida, quantidade de cartas a ser extraidas e o destino

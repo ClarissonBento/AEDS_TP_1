@@ -33,6 +33,7 @@ void CarregarBaralho_aleatorio(Mesa *mesa) {
 
    
 }
+
 Carta compra_carta(Lista_cartas *lista){
     if(taVazia(lista)){
         printf("Nao e possivel comprar cartas pois o baralho acabou");
@@ -44,5 +45,10 @@ Carta compra_carta(Lista_cartas *lista){
    return c;
     }
 
+
+}
+void descarte_tableau(Mesa *mesa,int indice_tb){
+    Carta c;
+   
 
 }
