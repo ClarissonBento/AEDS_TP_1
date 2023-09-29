@@ -31,11 +31,18 @@ void CarregarBaralho_aleatorio(Mesa *mesa) {
     // Embaralhando
     ListaCartas__embaralha(baralho);
 
-    //for (int i = 0; i < 52; i++) {
-    //    inserir_carta(&mesa->baralho, baralho[i]);
-    //}
+   
 }
 Carta compra_carta(Lista_cartas *lista){
+    if(taVazia(lista)){
+        printf("Nao e possivel comprar cartas pois o baralho acabou");
+        return;
+    }
+    else {
    Carta c = lista->p_Primeiro->carta;
+   lista->p_Primeiro=lista->p_Primeiro->proximo;
    return c;
+    }
+
+
 }
