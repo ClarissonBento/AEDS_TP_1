@@ -72,7 +72,7 @@ int seqAlt_retorna(Carta *c1,Carta *c2){
            return 0;
         }
         
-        if (c1->valor<c2->valor)//como acessar os valores das cartas criadas
+        if ((c2->valor)-(c1->valor)==1)
         {
             return 1;
         }
