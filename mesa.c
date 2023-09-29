@@ -33,7 +33,7 @@ void CarregarBaralho_aleatorio(Mesa *mesa) {
 
     // Insere as cartas no baralho da mesa
     for (int i = 0; i < 52; i++) {
-        inserir_carta(baralho[i], &mesa->baralho.p_Primeiro->carta);
+        Topo__adiciona(&baralho[i], &mesa->baralho.p_Primeiro->carta);
     }
 
 }
@@ -41,7 +41,7 @@ void CarregarBaralho_aleatorio(Mesa *mesa) {
 void CarregarBaralho(Mesa *mesa, Carta cartas[], int num_cartas) {
     for (int i = 0; i < num_cartas; i++) {
         // Insira cada carta no baralho da mesa
-        inserir_carta(&mesa->baralho, cartas[i]);
+        Topo__adiciona(&mesa->baralho, &cartas[i]);
     }
 }
 
