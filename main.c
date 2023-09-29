@@ -14,7 +14,7 @@ int main(){
     // botando outra carta
 
     Carta carta_2;
-    Carta__cria(&carta_2, PAUS, 6, CIMA);
+    Carta__cria(&carta_2, PAUS, 12, CIMA);
     Carta__exibe(&carta_2);
 
     if (seqNaipe_retorna(&carta_1, &carta_2) == 1) printf("Naipes de cores diferentes\n");
