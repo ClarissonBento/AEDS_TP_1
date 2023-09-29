@@ -35,3 +35,7 @@ void CarregarBaralho_aleatorio(Mesa *mesa) {
         inserir_carta(&mesa->baralho, baralho[i]);
     }
 }
+Carta compra_carta(Lista_cartas *lista){
+   Carta c = lista->p_Primeiro->carta;
+   return c;
+}

@@ -19,7 +19,7 @@ void inserir_baralho(Lista_cartas *lista);
 void preparar(Lista_cartas *lista);
 //funcao prearar
 //funcao vitoria
-void comprar_carta(Lista_cartas *lista);
+Carta compra_carta(Lista_cartas *lista);
 void descarte_base_mover(Lista_cartas *descarte,Lista_cartas *bases);
 void descarte_tableau(Lista_cartas *descarte, Lista_cartas *tableau);
 void tableu_bases(Lista_cartas *tableau, Lista_cartas *bases);
