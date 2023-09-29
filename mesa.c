@@ -38,10 +38,15 @@ void CarregarBaralho_aleatorio(Mesa *mesa) {
 
 }
 
-void CarregarBaralho(Mesa *mesa, Carta cartas[], int num_cartas) {
+void CarregarBaralho(Lista_cartas *lista, Carta *cartas, int num_cartas) {
+
+    while (!taVazia(lista)) {
+        Carta carta_removida = Topo__retorna(lista);
+        Topo__remove(lista, &carta_removida);
+    }
+
     for (int i = 0; i < num_cartas; i++) {
-        // Insira cada carta no baralho da mesa
-        Topo__adiciona(&mesa->baralho, &cartas[i]);
+        Topo__adiciona(lista, &cartas[i]);
     }
 }
 
