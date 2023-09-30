@@ -67,6 +67,21 @@ Carta compra_carta(Lista_cartas *lista){
     }
 
 }
+//guilherme nao conseguiu commitar, adicionei ela no codigo
+void preparar(Lista_cartas *baralho, Lista_cartas tableau[]) {
+    int coluna = 0; 
+    int cartasPorColuna = 1; 
+
+    while (!taVazia(baralho) && coluna < 7) {
+        for (int i = 0; i < cartasPorColuna; i++) {
+            Carta c = compra_carta(baralho); 
+            Topo__adiciona(&tableau[coluna], &c);
+        }
+        
+        coluna++;
+        cartasPorColuna++;
+        }
+}
 
 // Função para mover uma carta do descarte para uma coluna específica do tableau.
 void Descarte_para_tableau(Mesa *mesa, int indice_tableau) {
@@ -157,8 +172,36 @@ void bases_tableau(Mesa *mesa,int indice_base,int indice_tableau){
     }
     }
 }
-void mover_colunas(int indice_col_origem, int indice_col_destino,int qtd){
-   
+void mover_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destino,int qtd){
+    Lista_cartas *coluna_origem = &(mesa->tableau[indice_col_origem]);
+    Lista_cartas *coluna_destino = &(mesa->tableau[indice_col_destino]);
+    Carta carta_origem = Topo__retorna(coluna_origem);
+    Carta carta_destino = Topo__retorna(coluna_destino);
+
+
+    if(SeqTableau_retorna(&carta_origem,&carta_destino)){
+        Cartas__transfere(&coluna_origem,&coluna_destino,qtd);
+    }
+    else printf("Nao eh possivel colocar essas cartas nessa coluna");
 
 
 }
+int verificar_vitoria(Mesa *mesa){
+    int cartas_base=0,total=0;
+  
+     for (int i = 0; i < 4; i++) {
+        Lista_cartas *base = &(mesa->bases[i]);
+        cartas_base = Tamanho__retorna(&base[i]);
+        total+=cartas_base;
+        if(cartas_base!=13){
+            printf("A condicao de vitoria ainda nao foi alcancada, pois a base %d esta incompleta",i);
+            
+        }
+    }
+    if(total==52){
+        printf("parabens");
+        return true;
+    }else return false;
+    
+}
+
