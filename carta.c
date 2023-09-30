@@ -36,9 +36,9 @@ Obs: se a primeira carta é nula, então o valor válido para a segunda carta é
 --------------------------------------------------------------------------------------*/
 
 bool SeqBase_retorna(Carta *c1, Carta *c2) {
-    // Verificar se a primeira carta é nula
+    
     if (c1 == NULL) {
-        return (c2->valor == AS); // A segunda carta deve ser um Ás
+        return (c2->valor == AS); // A segunda carta deve ser um Ás pq a primeira deve ser nula
     }
 
     if (Naipe__retorna(c1) != Naipe__retorna(c2)) {
@@ -59,9 +59,9 @@ CARTA 2 TÁ POR CIMA
 --------------------------------------------------------------------------------------*/
 
 bool SeqTableau_retorna(Carta *c1, Carta *c2) {
-    // Verificar se a primeira carta é nula
+
     if (c1 == NULL) {
-        return (Valor__retorna(c2) == K); // A segunda carta deve ser um Rei
+        return (Valor__retorna(c2) == K); // A segunda carta deve ser um Rei pq a primeira deve ser nula
     }
 
     // Verificar se as cores são diferentes

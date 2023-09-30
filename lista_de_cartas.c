@@ -11,16 +11,17 @@ void ListaVazia__cria(Lista_cartas *lista) {
     lista->p_Ultimo = NULL;
 }
 
+// Usa um laço para percorrer a lista até o apontador atual ser nulo e então encerra
 int Tamanho__retorna(Lista_cartas *lista) {
     Apontador atual = lista->p_Primeiro;
-    int quantidade = 0;
+    int tamanho = 0;
 
     while (atual != NULL) {
-        quantidade++;
+        tamanho++;
         atual = atual->proximo;
     }
 
-    return quantidade;
+    return tamanho;
 }
 
 int taVazia(Lista_cartas *lista){

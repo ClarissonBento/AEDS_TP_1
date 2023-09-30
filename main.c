@@ -17,11 +17,11 @@ int main(){
     Carta__cria(&carta_2, ESPADAS, 6, CIMA);
     Carta__exibe(&carta_2);
 
-    if (seqNaipe_retorna(&carta_1, &carta_2) == 1) printf("Naipes de cores diferentes\n");
-    else printf("\nCores iguais\n");
+    if (SeqBase_retorna(&carta_1, &carta_2) == 1) printf("Entra na base\n");
+    else printf("\nNão entra na base\n");
 
-    if (seqAlt_retorna(&carta_2, &carta_1) == 1) printf("\nAdição permitida\n");
-    else printf("\nMovimento não permitido\n");
+    if (SeqTableau_retorna(&carta_2, &carta_1) == 1) printf("\nEntra no tableau\n");
+    else printf("\nNão entra no tableau\n");
     
     
     return 0;

@@ -2,7 +2,7 @@
 
 void Mesa__Inicializa(Mesa *mesa) {
 
-    ListaVazia__cria(&mesa->baralho);
+    ListaVazia__cria(&mesa->baralho); // perfeito
     ListaVazia__cria(&mesa->descarte);
     
     for (int i = 0; i < 4; i++) {
@@ -18,7 +18,7 @@ void Mesa__Inicializa(Mesa *mesa) {
 
 // REFAZER
 void CarregarBaralho_aleatorio(Mesa *mesa) {
-    Lista_cartas *baralho;
+    Lista_cartas *baralho; // fazendo lista sem iniciar lista
     Carta carta;
 
     int i = 0;
@@ -157,6 +157,7 @@ void bases_tableau(Mesa *mesa,int indice_base,int indice_tableau){
     }
     }
 }
+
 void mover_colunas(int indice_col_origem, int indice_col_destino,int qtd){
    
 
