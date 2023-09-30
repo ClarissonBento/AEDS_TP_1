@@ -22,7 +22,7 @@ int Tamanho__retorna(Lista_cartas *lista) {
 
     return quantidade;
 }
-//
+
 int taVazia(Lista_cartas *lista){
     if (lista->p_Primeiro == lista->p_Ultimo)
         return 1;

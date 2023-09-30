@@ -42,8 +42,8 @@ Naipe Naipe__retorna(Carta *carta);
 ValorCarta Valor__retorna(Carta *carta);
 Posicao Posicao__retorna(Carta *carta);
 void Posicao__alterar(Carta *carta);
-int seqNaipe_retorna(Carta *c1,Carta *c2);
-int seqAlt_retorna(Carta *c1, Carta *c2);
+bool SeqBase_retorna(Carta *c1, Carta *c2);
+bool SeqTableau_retorna(Carta *c1, Carta *c2);
 void Carta__exibe(Carta *c);
 // ----------------------------------------------------------------------------------//
 

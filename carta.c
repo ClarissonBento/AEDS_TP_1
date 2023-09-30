@@ -35,24 +35,18 @@ adequada como próxima carta numa sequência de mesmo naipe para a primeira cart
 Obs: se a primeira carta é nula, então o valor válido para a segunda carta é um Ás.
 --------------------------------------------------------------------------------------*/
 
-int seqNaipe_retorna(Carta *c1,Carta *c2){
-    if (c1->valor == nao_definido){
-        if (c1->valor == AS)
-        {
-            return 1;
-        }
-    
-    } 
-    if(c1->naipe==COPAS && c2->naipe==OUROS 
-    || c1->naipe==ESPADAS && c2->naipe==PAUS 
-    || c1->naipe==OUROS && c2->naipe==COPAS
-    || c1->naipe==PAUS && c2->naipe==ESPADAS
-    || c1->naipe==c2->naipe
-    )
-      {
-        return 0;
+bool SeqBase_retorna(Carta *c1, Carta *c2) {
+    // Verificar se a primeira carta é nula
+    if (c1 == NULL) {
+        return (c2->valor == AS); // A segunda carta deve ser um Ás
     }
-    else return 1;
+
+    if (Naipe__retorna(c1) != Naipe__retorna(c2)) {
+        return false; // Os naipes não são iguais
+    }
+
+    // Tem que ser apenas +1 maior
+    return (Valor__retorna(c2) == (Valor__retorna(c1) + 1));
 }
 
 /* ------------------------------------------------------------------------------------
@@ -64,21 +58,18 @@ Obs: se a primeira carta é nula, então o valor válido para a segunda carta é
 CARTA 2 TÁ POR CIMA
 --------------------------------------------------------------------------------------*/
 
-int seqAlt_retorna(Carta *c1,Carta *c2){
-    while (seqNaipe_retorna(c1,c2))
-    {
-        if (c1->valor == nao_definido)
-        {
-            if(c2->valor == K) return 1;
-
-            return 0;
-        }
-        
-        if ((c2->valor)-(c1->valor) == 1) return 1;
-        else return 0;
-
+bool SeqTableau_retorna(Carta *c1, Carta *c2) {
+    // Verificar se a primeira carta é nula
+    if (c1 == NULL) {
+        return (Valor__retorna(c2) == K); // A segunda carta deve ser um Rei
     }
 
+    // Verificar se as cores são diferentes
+    bool cores_alternadas = (Naipe__retorna(c1) == COPAS || Naipe__retorna(c1) == OUROS) !=
+                            (Naipe__retorna(c2) == COPAS || Naipe__retorna(c2) == OUROS);
+
+    // Tem que ser apenas -1 menor
+    return (cores_alternadas && (Valor__retorna(c2) == Valor__retorna(c1) - 1));
 }
 
 /* ------------------------------------------------------------------------------------
