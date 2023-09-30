@@ -61,34 +61,33 @@ void Preparar(Mesa *mesa) {
 
     // Distribua as cartas para o tableau
     for (int i = 0; i < 7; i++) {
-        for (int j = 0; j <= i; j++) {
-            Carta carta = compra_carta(&mesa->baralho);
-            // Defina a posição das cartas no tableau (a primeira é virada, as outras não)
-            if (j == i) {
-                Carta__cria(&carta, carta.naipe, carta.valor, CIMA);
-            } else {
-                Carta__cria(&carta, carta.naipe, carta.valor, BAIXO);
-            }
-            // Adicione a carta ao tableau
-            Topo__adiciona(&mesa->tableau[i], &carta);
+        Lista_cartas *coluna_tableau = &(mesa->tableau[i]);
+        while (i >= num_cartas_coluna) {
+            Carta c;
+            c = Topo__retorna(&baralho);
+            Topo__adiciona(coluna_tableau, &c);
+            num_cartas_coluna++;
         }
     }
 }
 
-/*
+
+
 //compra de cartas
-Carta compra_carta(Lista_cartas *lista){
-
-    if(taVazia(lista)){
-        printf("Nao e possivel comprar cartas pois o baralho acabou");
-        return;
+Carta compra_carta(Lista_cartas *lista) {
+    if (taVazia(lista)) {
+        printf("Não é possível comprar cartas, pois o baralho acabou.\n");
+        //caso o baralho esteja vazio, retornar uma carta nula
+        Carta carta_vazia;
+        carta_vazia.naipe = nao_definido;
+        carta_vazia.valor = nao_definido;
+        carta_vazia.posicao = nao_definido;
+        return carta_vazia;
+    } else {
+        Carta c = lista->p_Primeiro->carta;
+        lista->p_Primeiro = lista->p_Primeiro->proximo;
+        return c;
     }
-    else {
-   Carta c = lista->p_Primeiro->carta;
-   lista->p_Primeiro=lista->p_Primeiro->proximo;
-   return c;
-    }
-
 }
 
 /*
