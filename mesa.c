@@ -135,11 +135,28 @@ void tableau_bases(Mesa *mesa, int indice_tableau){
             Topo__adiciona(&base[3],&carta_tableau);
             }
         }
-       
-
-
     }
-
-  
-
+}
+void bases_tableau(Mesa *mesa,int indice_base,int indice_tableau){
+    Lista_cartas *base= &(mesa->bases[indice_base]);
+    Lista_cartas *coluna_tableau =&(mesa->tableau[indice_tableau]);
+    if(taVazia(&base)){
+        printf("A base esta vazia");
+    }else{
+       Carta carta_base = Topo__retorna(&base);
+       Carta carta_tableau = Topo__retorna(coluna_tableau);
+       // se ja tiver uma carta na coluna que planejamos mover a carta precisamos conferir
+       //se o naipe e a sequencia para essa insercao estejam corretos
+    if(!(taVazia(coluna_tableau))){
+        if(seqAlt_retorna(&carta_base,&carta_tableau) && seqNaipe_retorna(&carta_base,&carta_tableau)){
+        Topo__remove(&base,&carta_base);
+        Topo__adiciona(&coluna_tableau,&carta_base);
+        }
+    }
+    //se a coluna tiver vazia creio que pode add qualquer carrta a coluna, nao tenho certeza
+    //pois pode ser que seja possivel inicializar a coluna so com um rei mas nao entendo muito de paciencia
+    //no mais deixei assim qualquer correcao pode apagar essas linhas de comentario aqui
+    Topo__remove(&base,&carta_base);
+    Topo__adiciona(&coluna_tableau,&carta_base);
+    }
 }
