@@ -58,7 +58,6 @@ void CarregarBaralho(Lista_cartas *lista, Carta *cartas, int num_cartas) {
 void preparar(Mesa *mesa) {
     int num_cartas_coluna = 1;
 
-    // Embaralhe o baralho (supondo que CarregarBaralho_aleatorio faça isso)
     CarregarBaralho_aleatorio(mesa);
     Lista_cartas *baralho = &(mesa->baralho);
 
