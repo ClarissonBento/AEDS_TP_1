@@ -263,32 +263,22 @@ void Mover_bases_tableau(Mesa *mesa, int indice_base, int indice_tableau) {
         return;
     }
 
-    Carta carta_base = Topo__retorna(base);
-    Carta carta_tableau = Topo__retorna(coluna_tableau);
-
-    // Verifique se a coluna do tableau está vazia
-    if (taVazia(coluna_tableau)) {
-        if (carta_base.valor == K) {
-            Topo__remove(&base, &carta_base);
-            Topo__adiciona(coluna_tableau, &carta_base);
-            printf("Movido um Rei (K) para a coluna vazia do tableau.\n");
-            return;
-        } else {
-            printf("Somente é possível adicionar um Rei (K) a colunas vazias.\n");
-            return;
-        }
-    }
-
-    // Verifique se a sequência e o naipe são compatíveis
-    if (seqAlt_retorna(&carta_base, &carta_tableau) && seqNaipe_retorna(&carta_base, &carta_tableau)) {
+    if (taVazia(coluna_tableau) || (SeqBase_retorna(Topo__retorna(&base), Topo__retorna(coluna_tableau)) && SeqTableau_retorna(Topo__retorna(base), Topo__retorna(coluna_tableau)))) {
+        Carta carta_base = Topo__retorna(base);
         Topo__remove(base, &carta_base);
         Topo__adiciona(coluna_tableau, &carta_base);
-        printf("Movido uma carta para a coluna do tableau.\n");
+        printf("Movido de base %d para tableau %d.\n", indice_base, indice_tableau);
+    } else if (Topo__retorna(base).valor == K && taVazia(coluna_tableau)) {
+        Carta carta_base = Topo__retorna(base);
+        Topo__remove(base, &carta_base);
+        Topo__adiciona(coluna_tableau, &carta_base);
+        printf("Movido um Rei de base %d para tableau %d.\n", indice_base, indice_tableau);
     } else {
-        printf("Movimento inválido: sequência ou naipe incorreto.\n");
+        printf("Movimento inválido de base %d para tableau %d.\n", indice_base, indice_tableau);
     }
 }
 
+/*
 void Mover_entre_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destino,int qtd){
     Lista_cartas *coluna_origem = &(mesa->tableau[indice_col_origem]);
     Lista_cartas *coluna_destino = &(mesa->tableau[indice_col_destino]);
@@ -302,4 +292,4 @@ void Mover_entre_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destin
     else printf("Nao eh possivel colocar essas cartas nessa coluna");
 
 
-}
+}*/
