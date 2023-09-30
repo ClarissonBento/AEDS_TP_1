@@ -15,9 +15,9 @@ typedef struct {
 //inicializar cada uma das listas da mesa
 void Mesa__Inicializa(Mesa *mesa);
 void CarregarBaralho_aleatorio(Mesa *mesa);
-void CarregarBaralho();
+void CarregarBaralho(Lista_cartas *lista, Carta *cartas, int num_cartas);
 void inserir_baralho(Lista_cartas *lista);
-void preparar(Lista_cartas *baralho, Lista_cartas tableau[]);
+void preparar(Mesa *mesa);
 int verificar_vitoria(Mesa *mesa);
 Carta compra_carta(Lista_cartas *lista);
 void Descarte_para_bases(Lista_cartas *descarte,Lista_cartas *bases);

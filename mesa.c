@@ -41,20 +41,46 @@ void CarregarBaralho_aleatorio(Mesa *mesa) {
         Topo__remove(&baralho, &carta);
     }
 }
-/*
-void CarregarBaralho(Lista_cartas *lista, Carta *cartas, int num_cartas) {
 
+void CarregarBaralho(Lista_cartas *lista, Carta *cartas, int num_cartas) {
+    // Limpa a lista atual, se houver cartas nela
     while (!taVazia(lista)) {
         Carta carta_removida = Topo__retorna(lista);
         Topo__remove(lista, &carta_removida);
     }
 
+    // Adiciona as novas cartas à lista
     for (int i = 0; i < num_cartas; i++) {
         Topo__adiciona(lista, &cartas[i]);
     }
 }
 
+void preparar(Mesa *mesa) {
+    int num_cartas_coluna = 1;
 
+    // Embaralhe o baralho (supondo que CarregarBaralho_aleatorio faça isso)
+    CarregarBaralho_aleatorio(mesa);
+    Lista_cartas *baralho = &(mesa->baralho);
+
+    // Inicialize bases vazias
+    for (int i = 0; i < 4; i++) {
+        Lista_cartas *bases = &(mesa->bases[i]);
+        ListaVazia__cria(bases);
+    }
+
+    // Inicialize o tableau
+    for (int i = 0; i < 7; i++) {
+        Lista_cartas *coluna_tableau = &(mesa->tableau[i]);
+        while (i >= num_cartas_coluna) {
+            Carta c;
+            c = Topo__retorna(&baralho);
+            Topo__adiciona(coluna_tableau, &c);
+            num_cartas_coluna++;
+        }
+    }
+}
+
+/*
 //compra de cartas
 Carta compra_carta(Lista_cartas *lista){
 
@@ -69,22 +95,8 @@ Carta compra_carta(Lista_cartas *lista){
     }
 
 }
-//guilherme nao conseguiu commitar, adicionei ela no codigo
-void preparar(Lista_cartas *baralho, Lista_cartas tableau[]) {
-    int coluna = 0; 
-    int cartasPorColuna = 1; 
 
-    while (!taVazia(baralho) && coluna < 7) {
-        for (int i = 0; i < cartasPorColuna; i++) {
-            Carta c = compra_carta(baralho); 
-            Topo__adiciona(&tableau[coluna], &c);
-        }
-        
-        coluna++;
-        cartasPorColuna++;
-        }
-}
-
+/*
 // Função para mover uma carta do descarte para uma coluna específica do tableau.
 void Descarte_para_tableau(Mesa *mesa, int indice_tableau) {
 
