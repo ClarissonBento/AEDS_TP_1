@@ -3,15 +3,7 @@
 #include "mesa.h"
 
 // Função para exibir o menu interativo
-void exibir_menu() {
-    printf("\n[Menu]\n");
-    printf("1- Comprar Carta\n");
-    printf("2- Mover do descarte para as bases\n");
-    printf("3- Mover do descarte para o tableau\n");
-    printf("4- Mover do tableau para as bases\n");
-    printf("5- Mover das bases para o tableau\n");
-    printf("6- Mover entre colunas do tableau\n");
-}
+void exibir_menu();
 
 int main() {
     Mesa mesa;
@@ -20,7 +12,7 @@ int main() {
     int modo;
 
     // Seleção de modo de utilização: interativo (1) ou por arquivo (2)
-    printf("Selecione o modo de utilização\n 1 - Interativo, 2 - Por arquivo: ");
+    printf("Selecione o modo de utilização\n 1 - Interativo | 2 - Por arquivo: ");
     scanf("%i", &modo);
 
     if (modo == 1) {
@@ -37,19 +29,19 @@ int main() {
 
             switch (escolha) {
                 case 1:
-                    // Implemente a lógica para mover carta do tableau para a base
+                    
                     break;
                 case 2:
-                    // Implemente a lógica para mover carta do tableau para outro tableau
+                    
                     break;
                 case 3:
-                    // Implemente a lógica para mover carta da base para o tableau
+                    
                     break;
                 case 4:
-                    // Implemente a lógica para mover carta entre colunas do tableau
+                    
                     break;
                 case 5:
-                    // Implemente a lógica para virar carta do estoque
+                    
                     break;
                 case 6:
                     // Encerra o programa
@@ -76,4 +68,14 @@ int main() {
     }
 
     return 0;
+}
+
+void exibir_menu() {
+    printf("\n[Menu]\n");
+    printf("1- Comprar Carta\n");
+    printf("2- Mover do descarte para as bases\n");
+    printf("3- Mover do descarte para o tableau\n");
+    printf("4- Mover do tableau para as bases\n");
+    printf("5- Mover das bases para o tableau\n");
+    printf("6- Mover entre colunas do tableau\n");
 }
