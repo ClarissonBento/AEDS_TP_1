@@ -30,27 +30,31 @@ int taVazia(Lista_cartas *lista) {
 
 // Confere se a lista está vazia primeiro, se não estiver retorna a carta do topo
 Carta Topo__retorna(Lista_cartas *lista){
-    if (taVazia(lista)) return;
-    else {
-        Carta topo;
-        topo = lista->p_Primeiro->carta;
-        return topo;
-    }
+    Carta topo;
+    topo = lista->p_Primeiro->carta;
+    return topo;
 }
 
 int PosCarta__retorna(Lista_cartas *lista, Carta *carta) {
+    if (lista == NULL || lista->p_Primeiro == NULL || carta == NULL) {
+        // Tratamento de erro se a lista ou a carta forem inválidas
+        return nao_definido;
+    }
+
     Apontador atual = lista->p_Primeiro;
     int pos = 0;
-    
+
     while (atual != NULL) {
-        if (memcmp(&atual->carta, carta, sizeof(Carta)) == 0) {
+        if (Naipe__retorna(&atual->carta) == Naipe__retorna(carta) &&
+            Valor__retorna(&atual->carta) == Valor__retorna(carta) &&
+            Posicao__retorna(&atual->carta) == Posicao__retorna(carta)) {
             return pos; // Carta encontrada, retorna a posição
         }
         atual = atual->proximo;
         pos++;
     }
-    
-    return -1; // Carta não encontrada, retorna -1
+
+    return nao_definido; // Carta não encontrada, retorna -1
 }
 
 // --------------------------------------------------------------------------------- //
@@ -61,6 +65,11 @@ int PosCarta__retorna(Lista_cartas *lista, Carta *carta) {
 // ----------------------------------------------------------------------------------//
 
 void Topo__adiciona(Lista_cartas *lista, Carta *carta) {
+    if (lista == NULL) {
+        printf("Erro: Lista de cartas não inicializada.\n");
+        exit(1);
+    }
+
     Apontador nova_celula = (Apontador)malloc(sizeof(Celula));
 
     if (nova_celula == NULL) {
@@ -78,10 +87,9 @@ void Topo__adiciona(Lista_cartas *lista, Carta *carta) {
     lista->p_Primeiro = nova_celula;
 }
 
-
-
 // Remoção no inicio da lista
 void Topo__remove(Lista_cartas *lista, Carta *carta) {
+
     if (lista->p_Primeiro == NULL) {
         printf("A lista está vazia.\n");
         return;
@@ -95,7 +103,10 @@ void Topo__remove(Lista_cartas *lista, Carta *carta) {
     free(celula_removida);
 }
 
-// Não sei se isso tá certo KKKKKKK
+/*--------------------------------------------------------------------------------
+Transfere uma quantidade arbitrária de cartas a partir do topo de uma lista, 
+para o topo de outra, mantendo a ordem original.
+--------------------------------------------------------------------------------*/
 void Cartas__transfere(Lista_cartas *lista_origem, Lista_cartas *lista_destino, int quantidade) {
     if (lista_origem->p_Primeiro == NULL || quantidade <= 0) {
         printf("Falhou com sucesso.\n");
@@ -126,7 +137,11 @@ void Cartas__transfere(Lista_cartas *lista_origem, Lista_cartas *lista_destino, 
     lista_origem->p_Primeiro = celula_origem;
 }
 
-// Função para embaralhar uma lista de cartas
+/*---------------------------------------------------------------------------------------
+Verifica se a quantidade na lista é maior que 1, aloca espaço, 
+inicia uma semente aleatoria com srand(),
+e faz um loop que realiza o embaralhamento usando o algoritmo de Fisher-Yates.
+----------------------------------------------------------------------------------------*/
 void ListaCartas__embaralha(Lista_cartas *lista) {
     int quantidade = Tamanho__retorna(lista);
     if (quantidade <= 1) {
@@ -138,6 +153,7 @@ void ListaCartas__embaralha(Lista_cartas *lista) {
         indices[i] = i;
     }
 
+    // Fisher-Yates
     srand(time(NULL));
     for (int i = quantidade - 1; i > 0; i--) {
         int j = rand() % (i + 1);
