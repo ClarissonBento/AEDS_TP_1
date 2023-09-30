@@ -262,8 +262,9 @@ void Mover_bases_tableau(Mesa *mesa, int indice_base, int indice_tableau) {
         printf("A base está vazia.\n");
         return;
     }
-
-    if (taVazia(coluna_tableau) || (SeqBase_retorna(Topo__retorna(&base), Topo__retorna(coluna_tableau)) && SeqTableau_retorna(Topo__retorna(base), Topo__retorna(coluna_tableau)))) {
+    Carta c1= Topo__retorna(base);
+    Carta c2= Topo__retorna(coluna_tableau);
+    if (taVazia(coluna_tableau) || (SeqBase_retorna(&c1,&c2) && SeqTableau_retorna(&c1,&c2))) {
         Carta carta_base = Topo__retorna(base);
         Topo__remove(base, &carta_base);
         Topo__adiciona(coluna_tableau, &carta_base);
@@ -278,7 +279,6 @@ void Mover_bases_tableau(Mesa *mesa, int indice_base, int indice_tableau) {
     }
 }
 
-/*
 void Mover_entre_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destino,int qtd){
     Lista_cartas *coluna_origem = &(mesa->tableau[indice_col_origem]);
     Lista_cartas *coluna_destino = &(mesa->tableau[indice_col_destino]);
@@ -287,9 +287,9 @@ void Mover_entre_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destin
 
 
     if(SeqTableau_retorna(&carta_origem,&carta_destino)){
-        Cartas__transfere(&coluna_origem,&coluna_destino,qtd);
+        Cartas__transfere(coluna_origem,coluna_destino,qtd);
     }
     else printf("Nao eh possivel colocar essas cartas nessa coluna");
 
 
-}*/
+}
