@@ -20,8 +20,8 @@ int main() {
     int modo;
 
     // Seleção de modo de utilização: interativo (1) ou por arquivo (2)
-    printf("Selecione o modo de utilização (1 - Interativo, 2 - Por arquivo): ");
-    scanf("%d", &modo);
+    printf("Selecione o modo de utilização\n 1 - Interativo, 2 - Por arquivo: ");
+    scanf("%i", &modo);
 
     if (modo == 1) {
         // Inicialização do modo interativo com baralho aleatório
