@@ -149,10 +149,16 @@ void bases_tableau(Mesa *mesa,int indice_base,int indice_tableau){
         Topo__adiciona(&coluna_tableau,&carta_base);
         }
     }
-    //se a coluna tiver vazia creio que pode add qualquer carrta a coluna, nao tenho certeza
-    //pois pode ser que seja possivel inicializar a coluna so com um rei mas nao entendo muito de paciencia
-    //no mais deixei assim qualquer correcao pode apagar essas linhas de comentario aqui
-    Topo__remove(&base,&carta_base);
-    Topo__adiciona(&coluna_tableau,&carta_base);
+    if(carta_base.valor==K){
+        Topo__remove(&base,&carta_base);
+        Topo__adiciona(&coluna_tableau,&carta_base);
+    }else{
+    printf("Somente eh posivel adicionar um rei a colunas vazias");
     }
+    }
+}
+void mover_colunas(int indice_col_origem, int indice_col_destino,int qtd){
+   
+
+
 }
