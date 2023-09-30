@@ -205,7 +205,12 @@ int verificar_vitoria(Mesa *mesa){
     
 }
 void exibir_mesa(Mesa *mesa){
-    
+    printf("BARALHO\n");
+    ListaCartas__exibe(&mesa->baralho);
+    printf("\n");
+    printf("DESCARTE\n");
+    ListaCartas__exibe(&mesa->descarte);
+    printf("\n");
     printf("COLUNAS DO TABLEAU:\n");
     for(int i=0;i<7;i++){
         printf("COLUNA %d\n",i);
@@ -219,6 +224,18 @@ void exibir_mesa(Mesa *mesa){
        }
        printf("\n");
     }
-   // printf("BASES DO TABLEAU\n");
+   printf("BASES DO TABLEAU\n");
+   for(int i=0;i<4;i++){
+        printf("BASE %d\n",i);
+       Lista_cartas *base = &(mesa->bases[i]);
+       while (&base->p_Primeiro->carta!=NULL)
+       {
+            Carta *c= &base->p_Primeiro->carta;
+            printf("%d-%d ",c->valor,c->naipe);
+            base->p_Primeiro= base->p_Primeiro->proximo;
+            
+       }
+       printf("\n");
+    }
 
 }
