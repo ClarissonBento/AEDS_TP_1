@@ -24,31 +24,35 @@ int Tamanho__retorna(Lista_cartas *lista) {
     return tamanho;
 }
 
-int taVazia(Lista_cartas *lista){
-    if (lista->p_Primeiro == lista->p_Ultimo)
-        return 1;
-    else
-        return 0;
+int taVazia(Lista_cartas *lista) {
+    return lista->p_Primeiro == NULL;
 }
 
+// Confere se a lista está vazia primeiro, se não estiver retorna a carta do topo
 Carta Topo__retorna(Lista_cartas *lista){
-    Carta topo;
-    topo = lista->p_Primeiro->carta;
-    return topo;
+    if (taVazia(lista)) return;
+    else {
+        Carta topo;
+        topo = lista->p_Primeiro->carta;
+        return topo;
+    }
 }
 
-int PosCarta__retorna(Lista_cartas *lista, Carta *carta){
-    Apontador atual = lista->p_Primeiro->proximo;
-    int pos = 1;
+int PosCarta__retorna(Lista_cartas *lista, Carta *carta) {
+    Apontador atual = lista->p_Primeiro;
+    int pos = 0;
+    
     while (atual != NULL) {
-        if (&atual->carta == carta) {
-            return pos;
+        if (memcmp(&atual->carta, carta, sizeof(Carta)) == 0) {
+            return pos; // Carta encontrada, retorna a posição
         }
         atual = atual->proximo;
         pos++;
     }
-    return -1; // Retorna -1 se a carta não for encontrada
+    
+    return -1; // Carta não encontrada, retorna -1
 }
+
 // --------------------------------------------------------------------------------- //
 // Aqui preciamos decidir se a inserção vai ser feita no inicio da lista ou no final,
 // aparentemente a inserção e remoção no inicio da lista é mais eficiente.

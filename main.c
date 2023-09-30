@@ -3,7 +3,7 @@
 #include "mesa.h"
 
 int main(){
-Mesa *mesa;
+Mesa mesa;
 Mesa__Inicializa(&mesa);
 CarregarBaralho_aleatorio(&mesa);
 exibir_mesa(&mesa);
