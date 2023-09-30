@@ -139,43 +139,68 @@ void Descarte_para_tableau(Mesa *mesa, int indice_tb) {
     }
 }
 
-/*
-//mover do tablau para as bases
-void tableau_bases(Mesa *mesa, int indice_tableau){
-    if(taVazia(&(mesa->tableau[indice_tableau]))){
-        printf("essa coluna do tableau esta vazia");
-    }else{
-        Lista_cartas *coluna_tableau = &(mesa->tableau[indice_tableau]);
-        Carta carta_tableau = Topo__retorna(coluna_tableau);
-        Lista_cartas *base = &(mesa->bases);
-        Carta topo_base=Topo__retorna(&base);
-        if(Naipe__retorna(&carta_tableau)==COPAS){
-            if(taVazia(&base)|| (&topo_base.naipe == carta_tableau.naipe && //aqui verifica: se a lista tiver vazia,ela pode ser adicionada na base,
-            (carta_tableau.valor-topo_base.valor)==1)){                    // e verifica tambem se os naipes e sequencia sao compativeis para adicionar na base
-            Topo__adiciona(&base[0],&carta_tableau);
-            }
-        }
-       if(Naipe__retorna(&carta_tableau)==OUROS){
-            if(taVazia(&base)|| (&topo_base.naipe == carta_tableau.naipe && 
-            (carta_tableau.valor-topo_base.valor)==1)){
-            Topo__adiciona(&base[1],&carta_tableau);
-            }
-        }
-       if(Naipe__retorna(&carta_tableau)==PAUS){
-            if(taVazia(&base)|| (&topo_base.naipe == carta_tableau.naipe && 
-            (carta_tableau.valor-topo_base.valor)==1)){
-            Topo__adiciona(&base[3],&carta_tableau);
-            }
-        }
-       if(Naipe__retorna(&carta_tableau)==ESPADAS){
-            if(taVazia(&base)|| (&topo_base.naipe == carta_tableau.naipe && 
-            (carta_tableau.valor-topo_base.valor)==1)){
-            Topo__adiciona(&base[3],&carta_tableau);
-            }
-        }
+void tableau_bases(Mesa *mesa, int indice_tableau) {
+    if (taVazia(&(mesa->tableau[indice_tableau]))) {
+        printf("Esta coluna do tableau está vazia.\n");
+        return;
+    }
+
+    Lista_cartas *coluna_tableau = &(mesa->tableau[indice_tableau]);
+    Carta carta_tableau = Topo__retorna(coluna_tableau);
+    
+    // Determinar a lista de bases correspondente ao naipe da carta do tableau
+    Lista_cartas *base = NULL;
+    switch (Naipe__retorna(&carta_tableau)) {
+        case COPAS:
+            base = &(mesa->bases[0]);
+            break;
+        case OUROS:
+            base = &(mesa->bases[1]);
+            break;
+        case PAUS:
+            base = &(mesa->bases[2]);
+            break;
+        case ESPADAS:
+            base = &(mesa->bases[3]);
+            break;
+        default:
+            printf("Naipe inválido.\n");
+            return;
+    }
+
+    // Verificar se a base está vazia ou se a carta pode ser adicionada
+    Carta topo_base = Topo__retorna(base);
+    if (taVazia(base) || (Naipe__retorna(&topo_base) == Naipe__retorna(&carta_tableau) &&
+        (carta_tableau.valor - topo_base.valor) == 1)) {
+        Topo__adiciona(base, &carta_tableau);
+        Topo__remove(coluna_tableau, &carta_tableau);
+    } else {
+        printf("Movimento inválido: a carta do tableau não pode ser movida para a base.\n");
     }
 }
 
+int verificar_vitoria(Mesa *mesa) {
+    int cartas_base = 0, total = 0;
+
+    for (int i = 0; i < 4; i++) {
+        Lista_cartas *base = &(mesa->bases[i]);
+        cartas_base = Tamanho__retorna(base);
+        total += cartas_base;
+
+        if (cartas_base != 13) {
+            printf("A base %d está incompleta (%d cartas).\n", i, cartas_base);
+        }
+    }
+
+    if (total == 52) {
+        printf("Parabéns! Você venceu o jogo!\n");
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+/*
 void bases_tableau(Mesa *mesa,int indice_base,int indice_tableau){
     Lista_cartas *base= &(mesa->bases[indice_base]);
     Lista_cartas *coluna_tableau =&(mesa->tableau[indice_tableau]);
@@ -215,24 +240,7 @@ void mover_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destino,int 
 
 }
 
-int verificar_vitoria(Mesa *mesa){
-    int cartas_base=0,total=0;
-  
-     for (int i = 0; i < 4; i++) {
-        Lista_cartas *base = &(mesa->bases[i]);
-        cartas_base = Tamanho__retorna(&base[i]);
-        total+=cartas_base;
-        if(cartas_base!=13){
-            printf("A condicao de vitoria ainda nao foi alcancada, pois a base %d esta incompleta\n",i);
-            
-        }
-    }
-    if(total==52){
-        printf("parabens");
-        return true;
-    }else return false;
-    
-}
+
 
 void exibir_mesa(Mesa *mesa){
     printf("BARALHO\n");
