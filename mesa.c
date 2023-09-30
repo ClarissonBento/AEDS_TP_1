@@ -16,30 +16,32 @@ void Mesa__Inicializa(Mesa *mesa) {
     mesa->pontos = 0;
 }
 
-// REFAZER
 void CarregarBaralho_aleatorio(Mesa *mesa) {
-    Lista_cartas *baralho; // fazendo lista sem iniciar lista
+    Lista_cartas baralho; // Cria uma lista para o baralho
     Carta carta;
 
+    // Inicializa o baralho
+    ListaVazia__cria(&baralho);
+
     int i = 0;
-    for (int naipe = 0; naipe < 4; naipe++) {
-        for (int valor = 1; valor <= 13; valor++) {
-            //baralho[i].p_Primeiro->carta.naipe = naipe;
-            //baralho[i].p_Primeiro->carta.valor = valor;
-            //i++;
+    for (int naipe = COPAS; naipe <= PAUS; naipe++) {
+        for (ValorCarta valor = AS; valor <= K; valor++) {
+            Carta__cria(&carta, naipe, valor, CIMA); // Cria uma carta com o naipe, valor e posição
+            Topo__adiciona(&baralho, &carta); // Adiciona a carta ao baralho
         }
     }
 
-    // Embaralhando
-    ListaCartas__embaralha(baralho);
+    // Embaralhando o baralho
+    ListaCartas__embaralha(&baralho);
 
     // Insere as cartas no baralho da mesa
-    for (int i = 0; i < 52; i++) {
-        Topo__adiciona(&baralho[i], &mesa->baralho.p_Primeiro->carta);
+    while (!taVazia(&baralho)) {
+        Carta carta = Topo__retorna(&baralho);
+        Topo__adiciona(&mesa->baralho, &carta);
+        Topo__remove(&baralho, &carta);
     }
-
 }
-
+/*
 void CarregarBaralho(Lista_cartas *lista, Carta *cartas, int num_cartas) {
 
     while (!taVazia(lista)) {
@@ -186,6 +188,7 @@ void mover_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destino,int 
 
 
 }
+
 int verificar_vitoria(Mesa *mesa){
     int cartas_base=0,total=0;
   
@@ -204,6 +207,7 @@ int verificar_vitoria(Mesa *mesa){
     }else return false;
     
 }
+
 void exibir_mesa(Mesa *mesa){
     printf("BARALHO\n");
     ListaCartas__exibe(&mesa->baralho);
@@ -239,3 +243,4 @@ void exibir_mesa(Mesa *mesa){
     }
 
 }
+*/
