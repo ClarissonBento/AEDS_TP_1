@@ -98,6 +98,33 @@ Carta compra_carta(Lista_cartas *lista) {
     }
 }
 
+void Descarte_para_bases(Mesa *mesa) {
+    Lista_cartas *descarte = &(mesa->descarte);
+
+    if (taVazia(descarte)) {
+        printf("O descarte está vazio.\n");
+        return;
+    }
+
+    Carta carta_descarte = Topo__retorna(descarte);
+    Naipe naipe_descarte = Naipe__retorna(&carta_descarte);
+
+    // Verifique se a carta é um Ás (AS)
+    if (Valor__retorna(&carta_descarte) == AS) {
+        Lista_cartas *base_correspondente = &(mesa->bases[naipe_descarte]);
+
+        // Verifique se a base correspondente está vazia
+        if (taVazia(base_correspondente)) {
+            Topo__remove(descarte, &carta_descarte);
+            Topo__adiciona(base_correspondente, &carta_descarte);
+            printf("Movido um Ás para a base correspondente.\n");
+        } else {
+            printf("A base correspondente não está vazia.\n");
+        }
+    } else {
+        printf("A carta do descarte não é um Ás (AS).\n");
+    }
+}
 
 // Função para mover uma carta do descarte para uma coluna específica do tableau.
 void Descarte_para_tableau(Mesa *mesa, int indice_tb) {
@@ -139,7 +166,7 @@ void Descarte_para_tableau(Mesa *mesa, int indice_tb) {
     }
 }
 
-void tableau_bases(Mesa *mesa, int indice_tableau) {
+void Mover_tableau_bases(Mesa *mesa, int indice_tableau) {
     if (taVazia(&(mesa->tableau[indice_tableau]))) {
         printf("Esta coluna do tableau está vazia.\n");
         return;
@@ -228,31 +255,44 @@ void exibir_mesa(Mesa *mesa) {
     printf("PONTUAÇÃO: %d\n", mesa->pontos);
 }
 
-/*
-void bases_tableau(Mesa *mesa,int indice_base,int indice_tableau){
-    Lista_cartas *base= &(mesa->bases[indice_base]);
-    Lista_cartas *coluna_tableau =&(mesa->tableau[indice_tableau]);
-    if(taVazia(&base)){
-        printf("A base esta vazia");
-    }else{
-       Carta carta_base = Topo__retorna(&base);
-       Carta carta_tableau = Topo__retorna(coluna_tableau);
-       // se ja tiver uma carta na coluna que planejamos mover a carta precisamos conferir
-       //se o naipe e a sequencia para essa insercao estejam corretos
-    if(!(taVazia(coluna_tableau))){
-        if(seqAlt_retorna(&carta_base,&carta_tableau) && seqNaipe_retorna(&carta_base,&carta_tableau)){
-        Topo__remove(&base,&carta_base);
-        Topo__adiciona(&coluna_tableau,&carta_base);
+void bases_tableau(Mesa *mesa, int indice_base, int indice_tableau) {
+    Lista_cartas *base = &(mesa->bases[indice_base]);
+    Lista_cartas *coluna_tableau = &(mesa->tableau[indice_tableau]);
+
+    if (taVazia(base)) {
+        printf("A base está vazia.\n");
+        return;
+    }
+
+    Carta carta_base = Topo__retorna(base);
+    Carta carta_tableau = Topo__retorna(coluna_tableau);
+
+    // Verifique se a coluna do tableau está vazia
+    if (taVazia(coluna_tableau)) {
+        if (carta_base.valor == K) {
+            Topo__remove(&base, &carta_base);
+            Topo__adiciona(coluna_tableau, &carta_base);
+            printf("Movido um Rei (K) para a coluna vazia do tableau.\n");
+            return;
+        } else {
+            printf("Somente é possível adicionar um Rei (K) a colunas vazias.\n");
+            return;
         }
     }
-    if(carta_base.valor==K){
-        Topo__remove(&base,&carta_base);
-        Topo__adiciona(&coluna_tableau,&carta_base);
-    }else{
-    printf("Somente eh posivel adicionar um rei a colunas vazias");
-    }
+
+    // Verifique se a sequência e o naipe são compatíveis
+    if (seqAlt_retorna(&carta_base, &carta_tableau) && seqNaipe_retorna(&carta_base, &carta_tableau)) {
+        Topo__remove(base, &carta_base);
+        Topo__adiciona(coluna_tableau, &carta_base);
+        printf("Movido uma carta para a coluna do tableau.\n");
+    } else {
+        printf("Movimento inválido: sequência ou naipe incorreto.\n");
     }
 }
+
+/*
+
+
 void mover_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destino,int qtd){
     Lista_cartas *coluna_origem = &(mesa->tableau[indice_col_origem]);
     Lista_cartas *coluna_destino = &(mesa->tableau[indice_col_destino]);
