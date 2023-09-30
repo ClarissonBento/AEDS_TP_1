@@ -99,36 +99,48 @@ Carta compra_carta(Lista_cartas *lista) {
     }
 }
 
-/*
+
 // Função para mover uma carta do descarte para uma coluna específica do tableau.
-void Descarte_para_tableau(Mesa *mesa, int indice_tableau) {
-
-    if (taVazia(&(mesa->descarte))) {
-        printf("O descarte está vazio.\n");
+void Descarte_para_tableau(Mesa *mesa, int indice_tb) {
+    // Verifique se o índice do tableau é válido (0 a 6)
+    if (indice_tb < 0 || indice_tb > 6) {
+        printf("Índice do tableau inválido.\n");
         return;
     }
 
-    Carta carta_descartada = Topo__retorna(&(mesa->descarte));
+    Lista_cartas *descarte = &(mesa->descarte);
+    Lista_cartas *tableau = &(mesa->tableau[indice_tb]);
 
-    if (indice_tableau < 0 || indice_tableau >= 7) {
-        printf("Índice de coluna do tableau inválido.\n");
+    // Verifique se o descarte e o tableau estão vazios
+    if (taVazia(descarte) || Tamanho__retorna(tableau) >= 13) {
+        printf("Operação inválida: descarte vazio ou tableau cheio.\n");
         return;
     }
 
-    Lista_cartas *coluna_tableau = &(mesa->tableau[indice_tableau]);
+    // Obtenha a carta do topo do descarte
+    Carta carta = Topo__retorna(descarte);
 
-    Carta AUX = Topo__retorna(&coluna_tableau);
+    // Verifique se a carta pode ser movida para o tableau
+    if (Tamanho__retorna(tableau) == 0 && Valor__retorna(&carta) == 13) {
+        // Apenas o Rei pode ser colocado em uma coluna vazia do tableau
+        Topo__remove(descarte, &carta);
+        Topo__adiciona(tableau, &carta);
+    } else if (Tamanho__retorna(tableau) > 0) {
+        Carta carta_tableau = Topo__retorna(tableau);
 
-    if (taVazia(coluna_tableau) || seqAlt_retorna(&carta_descartada, &AUX) == 1) {
-        Topo__remove(&(mesa->descarte), &carta_descartada);
-        Topo__adiciona(coluna_tableau, &carta_descartada);
-
-        printf("Carta movida do descarte para o tableau (coluna %d).\n", indice_tableau);
+        // Verifique se a carta do descarte pode ser colocada sobre a carta do tableau
+        if (SeqTableau_retorna(&carta_tableau, &carta)) {
+            Topo__remove(descarte, &carta);
+            Topo__adiciona(tableau, &carta);
+        } else {
+            printf("Movimento inválido: a carta do descarte não pode ser colocada sobre a carta do tableau.\n");
+        }
     } else {
-        printf("A carta do descarte não pode ser movida para o tableau (coluna %d).\n", indice_tableau);
+        printf("Movimento inválido: a carta do descarte não pode ser colocada no tableau.\n");
     }
 }
 
+/*
 //mover do tablau para as bases
 void tableau_bases(Mesa *mesa, int indice_tableau){
     if(taVazia(&(mesa->tableau[indice_tableau]))){
