@@ -194,7 +194,7 @@ int verificar_vitoria(Mesa *mesa){
         cartas_base = Tamanho__retorna(&base[i]);
         total+=cartas_base;
         if(cartas_base!=13){
-            printf("A condicao de vitoria ainda nao foi alcancada, pois a base %d esta incompleta",i);
+            printf("A condicao de vitoria ainda nao foi alcancada, pois a base %d esta incompleta\n",i);
             
         }
     }
@@ -204,4 +204,21 @@ int verificar_vitoria(Mesa *mesa){
     }else return false;
     
 }
+void exibir_mesa(Mesa *mesa){
+    
+    printf("COLUNAS DO TABLEAU:\n");
+    for(int i=0;i<7;i++){
+        printf("COLUNA %d\n",i);
+       Lista_cartas *coluna_tableau = &(mesa->tableau[i]);
+       while (&coluna_tableau->p_Primeiro->carta!=NULL)
+       {
+            Carta *c= &coluna_tableau->p_Primeiro->carta;
+            printf("%d-%d ",c->valor,c->naipe);
+            coluna_tableau->p_Primeiro= coluna_tableau->p_Primeiro->proximo;
+            
+       }
+       printf("\n");
+    }
+   // printf("BASES DO TABLEAU\n");
 
+}

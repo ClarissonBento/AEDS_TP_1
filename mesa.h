@@ -25,5 +25,6 @@ void Descarte_para_tableau(Mesa *mesa,int indice_tb);
 void tableu_bases(Mesa *m,int indice);
 void bases_tableau(Mesa *m,int indice_base,int indice_tableau);
 void mover_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destino,int qtd);//pilha da qual vai ser extraida, quantidade de cartas a ser extraidas e o destino
+void exibir_mesa(Mesa *mesa);
 
 #endif
