@@ -17,14 +17,13 @@ void Mesa__Inicializa(Mesa *mesa);
 void CarregarBaralho_aleatorio(Mesa *mesa);
 void CarregarBaralho();
 void inserir_baralho(Lista_cartas *lista);
-void preparar(Lista_cartas *lista);
-//funcao prearar
-//funcao vitoria
+void preparar(Lista_cartas *baralho, Lista_cartas tableau[]);
+int verificar_vitoria(Mesa *mesa);
 Carta compra_carta(Lista_cartas *lista);
 void Descarte_para_bases(Lista_cartas *descarte,Lista_cartas *bases);
 void Descarte_para_tableau(Mesa *mesa,int indice_tb);
 void tableu_bases(Mesa *m,int indice);
 void bases_tableau(Mesa *m,int indice_base,int indice_tableau);
-void mover_colunas(int indice_col_origem, int indice_col_destino,int qtd);//pilha da qual vai ser extraida, quantidade de cartas a ser extraidas e o destino
+void mover_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destino,int qtd);//pilha da qual vai ser extraida, quantidade de cartas a ser extraidas e o destino
 
 #endif
