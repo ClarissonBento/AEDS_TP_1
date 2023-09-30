@@ -56,10 +56,10 @@ int seqNaipe_retorna(Carta *c1,Carta *c2){
 }
 
 /* ------------------------------------------------------------------------------------
-Verificar sequência alternada: 
+VERIFICA SEQUENCIA E NAIPE >>> PARA O TABLEAU <<<
+
 Recebe duas cartas como parâmetro, e retorna verdadeiro caso a segunda carta seja 
 adequada como próxima carta numa sequência de cores alternadas para a primeira carta.
-
 Obs: se a primeira carta é nula, então o valor válido para a segunda carta é um Rei
 CARTA 2 TÁ POR CIMA
 --------------------------------------------------------------------------------------*/

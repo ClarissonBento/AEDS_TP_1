@@ -16,15 +16,17 @@ void Mesa__Inicializa(Mesa *mesa) {
     mesa->pontos = 0;
 }
 
+// REFAZER
 void CarregarBaralho_aleatorio(Mesa *mesa) {
     Lista_cartas *baralho;
-    
+    Carta carta;
+
     int i = 0;
     for (int naipe = 0; naipe < 4; naipe++) {
         for (int valor = 1; valor <= 13; valor++) {
-            baralho[i].p_Primeiro->carta.naipe = naipe;
-            baralho[i].p_Primeiro->carta.valor = valor;
-            i++;
+            //baralho[i].p_Primeiro->carta.naipe = naipe;
+            //baralho[i].p_Primeiro->carta.valor = valor;
+            //i++;
         }
     }
 
@@ -130,6 +132,7 @@ void tableau_bases(Mesa *mesa, int indice_tableau){
         }
     }
 }
+
 void bases_tableau(Mesa *mesa,int indice_base,int indice_tableau){
     Lista_cartas *base= &(mesa->bases[indice_base]);
     Lista_cartas *coluna_tableau =&(mesa->tableau[indice_tableau]);
