@@ -16,10 +16,10 @@ typedef struct {
 void Mesa__Inicializa(Mesa *mesa);
 void CarregarBaralho_aleatorio(Mesa *mesa);
 void CarregarBaralho(Lista_cartas *lista, Carta *cartas, int num_cartas);
-void inserir_baralho(Lista_cartas *lista);
 void preparar(Mesa *mesa);
-int verificar_vitoria(Mesa *mesa);
+
 Carta compra_carta(Lista_cartas *lista);
+int verificar_vitoria(Mesa *mesa);
 void Descarte_para_bases(Lista_cartas *descarte,Lista_cartas *bases);
 void Descarte_para_tableau(Mesa *mesa,int indice_tb);
 void tableu_bases(Mesa *m,int indice);

@@ -56,25 +56,15 @@ void CarregarBaralho(Lista_cartas *lista, Carta *cartas, int num_cartas) {
 }
 
 void preparar(Mesa *mesa) {
-    int num_cartas_coluna = 1;
+    // Embaralhe o baralho
+    ListaCartas__embaralha(&mesa->baralho);
 
-    // Embaralhe o baralho (supondo que CarregarBaralho_aleatorio faça isso)
-    CarregarBaralho_aleatorio(mesa);
-    Lista_cartas *baralho = &(mesa->baralho);
-
-    // Inicialize bases vazias
-    for (int i = 0; i < 4; i++) {
-        Lista_cartas *bases = &(mesa->bases[i]);
-        ListaVazia__cria(bases);
-    }
-
-    // Inicialize o tableau
+    // Distribua as cartas para o tableau
     for (int i = 0; i < 7; i++) {
         Lista_cartas *coluna_tableau = &(mesa->tableau[i]);
-        while (i > num_cartas_coluna) {
+        while (i >= num_cartas_coluna) {
             Carta c;
-            c = Topo__retorna(baralho);
-            Topo__remove(baralho,&c);
+            c = Topo__retorna(&baralho);
             Topo__adiciona(coluna_tableau, &c);
             num_cartas_coluna++;
         }
