@@ -23,7 +23,7 @@ void preparar(Lista_cartas *lista);
 Carta compra_carta(Lista_cartas *lista);
 void Descarte_para_bases(Lista_cartas *descarte,Lista_cartas *bases);
 void Descarte_para_tableau(Mesa *mesa,int indice_tb);
-void tableu_bases(Lista_cartas *tableau, Lista_cartas *bases);
+void tableu_bases(Mesa *m,int indice);
 void bases_tableau(Lista_cartas *bases, Lista_cartas *tableau);
 void mover_colunas(Lista_cartas *pilha_origem,Lista_cartas *pilha_destino,int qtd);//pilha da qual vai ser extraida, quantidade de cartas a ser extraidas e o destino
 

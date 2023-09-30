@@ -50,6 +50,8 @@ void CarregarBaralho(Lista_cartas *lista, Carta *cartas, int num_cartas) {
     }
 }
 
+
+//compra de cartas
 Carta compra_carta(Lista_cartas *lista){
 
     if(taVazia(lista)){
@@ -98,4 +100,46 @@ void Descarte_para_tableau(Mesa *mesa, int indice_tableau) {
     } else {
         printf("A carta do descarte não pode ser movida para o tableau (coluna %d).\n", indice_tableau);
     }
+}
+
+//mover do tablau para as bases
+void tableau_bases(Mesa *mesa, int indice_tableau){
+    if(taVazia(&(mesa->tableau[indice_tableau]))){
+        printf("essa coluna do tableau esta vazia");
+    }else{
+        Lista_cartas *coluna_tableau = &(mesa->tableau[indice_tableau]);
+        Carta carta_tableau = Topo__retorna(coluna_tableau);
+        Lista_cartas *base = &(mesa->bases);
+        Carta topo_base=Topo__retorna(&base);
+        if(Naipe__retorna(&carta_tableau)==COPAS){
+            if(taVazia(&base)|| (&topo_base.naipe == carta_tableau.naipe && //aqui verifica: se a lista tiver vazia,ela pode ser adicionada na base,
+            (carta_tableau.valor-topo_base.valor)==1)){                    // e verifica tambem se os naipes e sequencia sao compativeis para adicionar na base
+            Topo__adiciona(&base[0],&carta_tableau);
+            }
+        }
+       if(Naipe__retorna(&carta_tableau)==OUROS){
+            if(taVazia(&base)|| (&topo_base.naipe == carta_tableau.naipe && 
+            (carta_tableau.valor-topo_base.valor)==1)){
+            Topo__adiciona(&base[1],&carta_tableau);
+            }
+        }
+       if(Naipe__retorna(&carta_tableau)==PAUS){
+            if(taVazia(&base)|| (&topo_base.naipe == carta_tableau.naipe && 
+            (carta_tableau.valor-topo_base.valor)==1)){
+            Topo__adiciona(&base[3],&carta_tableau);
+            }
+        }
+       if(Naipe__retorna(&carta_tableau)==ESPADAS){
+            if(taVazia(&base)|| (&topo_base.naipe == carta_tableau.naipe && 
+            (carta_tableau.valor-topo_base.valor)==1)){
+            Topo__adiciona(&base[3],&carta_tableau);
+            }
+        }
+       
+
+
+    }
+
+  
+
 }
