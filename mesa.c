@@ -80,6 +80,54 @@ void preparar(Mesa *mesa) {
     }
 }
 
+int verificar_vitoria(Mesa *mesa) {
+    int cartas_base = 0, total = 0;
+
+    for (int i = 0; i < 4; i++) {
+        Lista_cartas *base = &(mesa->bases[i]);
+        cartas_base = Tamanho__retorna(base);
+        total += cartas_base;
+
+        if (cartas_base != 13) {
+            printf("A base %d está incompleta (%d cartas).\n", i, cartas_base);
+        }
+    }
+
+    if (total == 52) {
+        printf("Parabéns! Você venceu o jogo!\n");
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+void exibir_mesa(Mesa *mesa) {
+    printf("BARALHO\n");
+    ListaCartas__exibe(&(mesa->baralho));
+    printf("\n");
+
+    printf("DESCARTE\n");
+    ListaCartas__exibe(&(mesa->descarte));
+    printf("\n");
+
+    printf("COLUNAS DO TABLEAU:\n");
+    for (int i = 0; i < 7; i++) {
+        printf("COLUNA %d\n", i);
+        Lista_cartas *coluna_tableau = &(mesa->tableau[i]);
+        ListaCartas__exibe(coluna_tableau);
+        printf("\n");
+    }
+
+    printf("BASES DO TABLEAU\n");
+    for (int i = 0; i < 4; i++) {
+        printf("BASE %d\n", i);
+        Lista_cartas *base = &(mesa->bases[i]);
+        ListaCartas__exibe(base);
+        printf("\n");
+    }
+
+    printf("PONTUAÇÃO: %d\n", mesa->pontos);
+}
 
 //compra de cartas
 Carta compra_carta(Lista_cartas *lista) {
@@ -206,56 +254,7 @@ void Mover_tableau_bases(Mesa *mesa, int indice_tableau) {
     }
 }
 
-int verificar_vitoria(Mesa *mesa) {
-    int cartas_base = 0, total = 0;
-
-    for (int i = 0; i < 4; i++) {
-        Lista_cartas *base = &(mesa->bases[i]);
-        cartas_base = Tamanho__retorna(base);
-        total += cartas_base;
-
-        if (cartas_base != 13) {
-            printf("A base %d está incompleta (%d cartas).\n", i, cartas_base);
-        }
-    }
-
-    if (total == 52) {
-        printf("Parabéns! Você venceu o jogo!\n");
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-void exibir_mesa(Mesa *mesa) {
-    printf("BARALHO\n");
-    ListaCartas__exibe(&(mesa->baralho));
-    printf("\n");
-
-    printf("DESCARTE\n");
-    ListaCartas__exibe(&(mesa->descarte));
-    printf("\n");
-
-    printf("COLUNAS DO TABLEAU:\n");
-    for (int i = 0; i < 7; i++) {
-        printf("COLUNA %d\n", i);
-        Lista_cartas *coluna_tableau = &(mesa->tableau[i]);
-        ListaCartas__exibe(coluna_tableau);
-        printf("\n");
-    }
-
-    printf("BASES DO TABLEAU\n");
-    for (int i = 0; i < 4; i++) {
-        printf("BASE %d\n", i);
-        Lista_cartas *base = &(mesa->bases[i]);
-        ListaCartas__exibe(base);
-        printf("\n");
-    }
-
-    printf("PONTUAÇÃO: %d\n", mesa->pontos);
-}
-
-void bases_tableau(Mesa *mesa, int indice_base, int indice_tableau) {
+void Mover_bases_tableau(Mesa *mesa, int indice_base, int indice_tableau) {
     Lista_cartas *base = &(mesa->bases[indice_base]);
     Lista_cartas *coluna_tableau = &(mesa->tableau[indice_tableau]);
 
@@ -290,10 +289,7 @@ void bases_tableau(Mesa *mesa, int indice_base, int indice_tableau) {
     }
 }
 
-/*
-
-
-void mover_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destino,int qtd){
+void Mover_entre_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destino,int qtd){
     Lista_cartas *coluna_origem = &(mesa->tableau[indice_col_origem]);
     Lista_cartas *coluna_destino = &(mesa->tableau[indice_col_destino]);
     Carta carta_origem = Topo__retorna(coluna_origem);
@@ -307,8 +303,3 @@ void mover_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destino,int 
 
 
 }
-
-
-
-
-*/
