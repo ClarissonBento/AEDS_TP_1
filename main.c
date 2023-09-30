@@ -29,27 +29,38 @@ int main() {
 
             switch (escolha) {
                 case 1:
-                    
-                    break;
+                compra_carta(&mesa.baralho);
+                break;
+
                 case 2:
-                    
-                    break;
+                Descarte_para_bases(&mesa);
+                break;
+
                 case 3:
-                    
-                    break;
+                int aux;
+                printf("Para qual coluna deseja mover? ");
+                Descarte_para_tableau(&mesa, aux);
+                break;
+
                 case 4:
-                    
-                    break;
+                //Mover_tableau_bases();
+                break;
+
                 case 5:
-                    
-                    break;
+                //Mover_bases_tableau();
+                break;
+
                 case 6:
-                    // Encerra o programa
-                    printf("O programa foi encerrado.\n");
-                    return 0;
+                //Mover_entre_colunas();
+                break;
+                    
+                case 7:
+                printf("O programa foi encerrado.\n");
+                return 0;
+
                 default:
-                    printf("Opção inválida. Tente novamente.\n");
-                    break;
+                printf("Opção inválida. Tente novamente.\n");
+                break;
             }
 
             // Verifique a condição de vitória
@@ -78,4 +89,5 @@ void exibir_menu() {
     printf("4- Mover do tableau para as bases\n");
     printf("5- Mover das bases para o tableau\n");
     printf("6- Mover entre colunas do tableau\n");
+    printf("7- Encerrar\n");
 }
