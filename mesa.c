@@ -68,32 +68,25 @@ Carta compra_carta(Lista_cartas *lista){
 
 // Função para mover uma carta do descarte para uma coluna específica do tableau.
 void Descarte_para_tableau(Mesa *mesa, int indice_tableau) {
-    // Verifica se o descarte está vazio.
+
     if (taVazia(&(mesa->descarte))) {
         printf("O descarte está vazio.\n");
         return;
     }
 
-    // Obtém a carta do topo do descarte.
     Carta carta_descartada = Topo__retorna(&(mesa->descarte));
 
-    // Verifica se o índice do tableau é válido.
     if (indice_tableau < 0 || indice_tableau >= 7) {
         printf("Índice de coluna do tableau inválido.\n");
         return;
     }
 
-    // Obtém a coluna do tableau correspondente.
     Lista_cartas *coluna_tableau = &(mesa->tableau[indice_tableau]);
 
     Carta AUX = Topo__retorna(&coluna_tableau);
 
-    // Verifica se a coluna do tableau está vazia ou se a carta pode ser movida para a coluna.
     if (taVazia(coluna_tableau) || seqAlt_retorna(&carta_descartada, &AUX) == 1) {
-        // Remove a carta do topo do descarte.
         Topo__remove(&(mesa->descarte), &carta_descartada);
-
-        // Adiciona a carta à coluna do tableau correspondente.
         Topo__adiciona(coluna_tableau, &carta_descartada);
 
         printf("Carta movida do descarte para o tableau (coluna %d).\n", indice_tableau);
