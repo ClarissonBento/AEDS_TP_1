@@ -200,6 +200,34 @@ int verificar_vitoria(Mesa *mesa) {
     }
 }
 
+void exibir_mesa(Mesa *mesa) {
+    printf("BARALHO\n");
+    ListaCartas__exibe(&(mesa->baralho));
+    printf("\n");
+
+    printf("DESCARTE\n");
+    ListaCartas__exibe(&(mesa->descarte));
+    printf("\n");
+
+    printf("COLUNAS DO TABLEAU:\n");
+    for (int i = 0; i < 7; i++) {
+        printf("COLUNA %d\n", i);
+        Lista_cartas *coluna_tableau = &(mesa->tableau[i]);
+        ListaCartas__exibe(coluna_tableau);
+        printf("\n");
+    }
+
+    printf("BASES DO TABLEAU\n");
+    for (int i = 0; i < 4; i++) {
+        printf("BASE %d\n", i);
+        Lista_cartas *base = &(mesa->bases[i]);
+        ListaCartas__exibe(base);
+        printf("\n");
+    }
+
+    printf("PONTUAÇÃO: %d\n", mesa->pontos);
+}
+
 /*
 void bases_tableau(Mesa *mesa,int indice_base,int indice_tableau){
     Lista_cartas *base= &(mesa->bases[indice_base]);
@@ -242,39 +270,5 @@ void mover_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destino,int 
 
 
 
-void exibir_mesa(Mesa *mesa){
-    printf("BARALHO\n");
-    ListaCartas__exibe(&mesa->baralho);
-    printf("\n");
-    printf("DESCARTE\n");
-    ListaCartas__exibe(&mesa->descarte);
-    printf("\n");
-    printf("COLUNAS DO TABLEAU:\n");
-    for(int i=0;i<7;i++){
-        printf("COLUNA %d\n",i);
-       Lista_cartas *coluna_tableau = &(mesa->tableau[i]);
-       while (&coluna_tableau->p_Primeiro->carta!=NULL)
-       {
-            Carta *c= &coluna_tableau->p_Primeiro->carta;
-            printf("%d-%d ",c->valor,c->naipe);
-            coluna_tableau->p_Primeiro= coluna_tableau->p_Primeiro->proximo;
-            
-       }
-       printf("\n");
-    }
-   printf("BASES DO TABLEAU\n");
-   for(int i=0;i<4;i++){
-        printf("BASE %d\n",i);
-       Lista_cartas *base = &(mesa->bases[i]);
-       while (&base->p_Primeiro->carta!=NULL)
-       {
-            Carta *c= &base->p_Primeiro->carta;
-            printf("%d-%d ",c->valor,c->naipe);
-            base->p_Primeiro= base->p_Primeiro->proximo;
-            
-       }
-       printf("\n");
-    }
 
-}
 */
