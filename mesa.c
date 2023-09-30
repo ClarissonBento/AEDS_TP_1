@@ -290,6 +290,5 @@ void Mover_entre_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destin
         Cartas__transfere(coluna_origem,coluna_destino,qtd);
     }
     else printf("Nao eh possivel colocar essas cartas nessa coluna");
-
-
+    
 }
