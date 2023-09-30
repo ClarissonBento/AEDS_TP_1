@@ -5,12 +5,12 @@
 // Função para exibir o menu interativo
 void exibir_menu() {
     printf("\n[Menu]\n");
-    printf("1. Mover carta do tableau para base\n");
-    printf("2. Mover carta do tableau para tableau\n");
-    printf("3. Mover carta do base para tableau\n");
-    printf("4. Mover carta entre colunas do tableau\n");
-    printf("5. Virar carta do estoque\n");
-    printf("6. Encerrar o programa\n");
+    printf("1- Comprar Carta\n");
+    printf("2- Mover do descarte para as bases\n");
+    printf("3- Mover do descarte para o tableau\n");
+    printf("4- Mover do tableau para as bases\n");
+    printf("5- Mover das bases para o tableau\n");
+    printf("6- Mover entre colunas do tableau\n");
 }
 
 int main() {
