@@ -55,7 +55,7 @@ void CarregarBaralho(Lista_cartas *lista, Carta *cartas, int num_cartas) {
     }
 }
 
-void preparar(Mesa *mesa) {
+void Preparar(Mesa *mesa) {
     // Embaralhe o baralho
     ListaCartas__embaralha(&mesa->baralho);
 
