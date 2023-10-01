@@ -1,45 +1,69 @@
 #include <stdio.h>
 #include "lista_de_cartas.h"
 #include "mesa.h"
-int modo_iterativo(Mesa *m);
-void exibir_menu();
 
-int main() {
-    int modo;
-    Mesa *mesa = (Mesa *)malloc(sizeof(Mesa)); // Aloque memória para a mesa
-    if (mesa == NULL) {
-        printf("Erro ao alocar memória para a mesa.\n");
-        return 1; // Saia do programa com código de erro
-    }
-
+// Função para inicializar o sistema do jogo de Paciência
+void InicializarJogo(Mesa *mesa) {
+    // Inicialize a mesa e o baralho conforme necessário
     Mesa__Inicializa(mesa);
-    preparar(mesa); 
-    printf("Digite o modo de jogo: 1 para iterativo e 2 para arquivo.\n");
-    scanf("%d",&modo);
-    if (modo == 1) {
-        modo_iterativo(mesa);
+    // Carregue o baralho aleatoriamente ou a partir de um arquivo
+    // Implemente essa parte de acordo com sua escolha de interatividade ou modo arquivo
+}
+
+// Função para lidar com a lógica do jogo no modo interativo
+void ModoInterativo(Mesa *mesa) {
+    int opcao;
+    do {
+        // Exiba o estado atual da mesa do jogo
+        exibir_mesa(mesa);
+        
+        // Exiba um menu de opções para o jogador
+        printf("\nEscolha uma opcao:\n");
+        printf("1. Comprar uma carta\n");
+        printf("2. Mover do descarte para as bases\n");
+        printf("3. Mover do descarte para o tableau\n");
+        printf("4. Mover do tableu para as bases\n");
+        printf("5. Mover das bases para o tableau\n");
+        printf("6. Mover entre colunas do tableau\n");
+        printf("7. Encerrar o jogo\n");
+        printf("Opcao: ");
+        scanf("%d", &opcao);
+
+        // Implemente a lógica para cada opção escolhida pelo jogador
+
+    } while (opcao != 7 && !verificar_vitoria(mesa));
+
+    if (verificar_vitoria(mesa)) {
+        printf("\nParabéns! Você venceu o jogo!\n");
     } else {
-        printf("Paisanduuuuu\n");
+        printf("\nO jogo foi encerrado.\n");
     }
-   
-    free(mesa); // Libere a memória alocada para a mesa antes de sair do programa
+}
+
+// Função principal
+int main() {
+    // Inicialize a semente para gerar números aleatórios
+    srand(time(NULL));
+
+    // Crie uma variável do tipo Mesa para representar o jogo
+    Mesa mesa;
+
+    // Inicialize o sistema do jogo de Paciência
+    InicializarJogo(&mesa);
+
+    int modo;
+    printf("Escolha o modo de utilizacao (1 para interativo, 2 para arquivo): ");
+    scanf("%d", &modo);
+
+    if (modo == 1) {
+        // Modo interativo
+        ModoInterativo(&mesa);
+    } else if (modo == 2) {
+        // Modo arquivo (implemente conforme necessário)
+        // Carregue o jogo a partir de um arquivo e exiba o estado inicial e final
+    } else {
+        printf("Modo de utilizacao invalido.\n");
+    }
+
     return 0;
-}
-
-void exibir_menu(){
-    printf("\n[Menu]\n");
-    printf("1 para Comprar Carta\n");
-    printf("2 para Mover do descarte para as bases\n");
-    printf("3 para Mover do descarte para o tableau\n");
-    printf("4 para Mover do tableau para as bases\n");
-    printf("5 para Mover das bases para o tableau\n");
-    printf("6 para Mover entre colunas do tableau\n");
-    printf("7 para Encerrar\n");
-}
-
-int modo_iterativo(Mesa *m){
-    int v = verificar_vitoria(m);
-    printf("%d",v);
-    
-    return v; 
 }
