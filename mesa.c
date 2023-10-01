@@ -56,8 +56,6 @@ void CarregarBaralho(Lista_cartas *lista, Carta *cartas, int num_cartas) {
 }
 
 void preparar(Mesa *mesa) {
-    int num_cartas_coluna;
-
     CarregarBaralho_aleatorio(mesa);
     Lista_cartas *baralho = &(mesa->baralho);
 
@@ -70,10 +68,9 @@ void preparar(Mesa *mesa) {
     // Inicialize o tableau
     for (int i = 0; i < 7; i++) {
         Lista_cartas *coluna_tableau = &(mesa->tableau[i]);
-        num_cartas_coluna = 0; // Reinicialize num_cartas_coluna
 
-        // Inicialize todas as cartas na coluna com a face para baixo
-        while (num_cartas_coluna <= i + 1) { // Corrigido para garantir o número correto de cartas
+        // Distribua as cartas no tableau de acordo com o número da coluna
+        for (int num_cartas_coluna = 0; num_cartas_coluna <= i + 1; num_cartas_coluna++) {
             if (taVazia(baralho)) {
                 printf("Baralho vazio. Não há cartas suficientes para o tableau.\n");
                 return; // Encerre a função se o baralho estiver vazio
@@ -81,10 +78,14 @@ void preparar(Mesa *mesa) {
 
             Carta c;
             c = Topo__retorna(baralho);
-            Posicao__alterar(&c); // Vire a carta para cima
             Topo__remove(baralho, &c);
+
+            // A primeira carta em cada coluna do tableau está virada para cima, o resto para baixo
+            if (num_cartas_coluna == i) {
+                Posicao__alterar(&c); // Vire a carta para cima
+            }
+
             Topo__adiciona(coluna_tableau, &c);
-            num_cartas_coluna++;
         }
     }
 }
