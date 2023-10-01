@@ -140,7 +140,7 @@ void exibir_mesa(Mesa *mesa) {
 }
 
 //compra de cartas
-Carta compra_carta(Lista_cartas *lista) {
+Carta compra_carta(Mesa *mesa,Lista_cartas *lista) {
     if (taVazia(lista)) {
         printf("Não é possível comprar cartas, pois o baralho acabou.\n");
         //caso o baralho esteja vazio, retornar uma carta nula
@@ -153,10 +153,12 @@ Carta compra_carta(Lista_cartas *lista) {
         Carta c = lista->p_Primeiro->carta;
         lista->p_Primeiro = lista->p_Primeiro->proximo;
         return c;
+        Topo__adiciona(&(mesa->descarte),&c);
     }
 }
 
 void Descarte_para_bases(Mesa *mesa) {
+    mesa->pontos+=10;
     Lista_cartas *descarte = &(mesa->descarte);
 
     if (taVazia(descarte)) {
@@ -186,6 +188,7 @@ void Descarte_para_bases(Mesa *mesa) {
 
 // Função para mover uma carta do descarte para uma coluna específica do tableau.
 void Descarte_para_tableau(Mesa *mesa, int indice_tb) {
+    mesa->pontos+=5;
     // Verifique se o índice do tableau é válido (0 a 6)
     if (indice_tb < 0 || indice_tb > 6) {
         printf("Índice do tableau inválido.\n");
@@ -225,6 +228,7 @@ void Descarte_para_tableau(Mesa *mesa, int indice_tb) {
 }
 
 void Mover_tableau_bases(Mesa *mesa, int indice_tableau) {
+    mesa->pontos+=10;
     if (taVazia(&(mesa->tableau[indice_tableau]))) {
         printf("Esta coluna do tableau está vazia.\n");
         return;
@@ -265,6 +269,7 @@ void Mover_tableau_bases(Mesa *mesa, int indice_tableau) {
 }
 
 void Mover_bases_tableau(Mesa *mesa, int indice_base, int indice_tableau) {
+    mesa->pontos-=15;
     Lista_cartas *base = &(mesa->bases[indice_base]);
     Lista_cartas *coluna_tableau = &(mesa->tableau[indice_tableau]);
 
@@ -300,5 +305,6 @@ void Mover_entre_colunas(Mesa *mesa,int indice_col_origem, int indice_col_destin
         Cartas__transfere(coluna_origem,coluna_destino,qtd);
     }
     else printf("Nao eh possivel colocar essas cartas nessa coluna");
+    mesa->pontos+=5;
     
 }

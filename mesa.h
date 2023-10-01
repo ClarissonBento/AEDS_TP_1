@@ -17,7 +17,7 @@ void Mesa__Inicializa(Mesa *mesa);
 void CarregarBaralho_aleatorio(Mesa *mesa);
 void CarregarBaralho(Lista_cartas *lista, Carta *cartas, int num_cartas);
 void preparar(Mesa *mesa);
-Carta compra_carta(Lista_cartas *lista);
+Carta compra_carta(Mesa *mesa, Lista_cartas *lista);
 int verificar_vitoria(Mesa *mesa);
 void Descarte_para_bases(Mesa *mesa);
 void Descarte_para_tableau(Mesa *mesa,int indice_tb);

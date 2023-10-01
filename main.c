@@ -34,7 +34,7 @@ void ModoInterativo(Mesa *mesa) {
 
         switch (opcao) {
             case 1: 
-            compra_carta(&mesa->baralho);
+            compra_carta(mesa,&mesa->baralho);
             break;
 
             case 2:
