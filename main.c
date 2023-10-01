@@ -6,12 +6,15 @@
 void InicializarJogo(Mesa *mesa) {
     // Inicialize a mesa e o baralho conforme necessário
     Mesa__Inicializa(mesa);
+    preparar(mesa);
     // Carregue o baralho aleatoriamente ou a partir de um arquivo
     // Implemente essa parte de acordo com sua escolha de interatividade ou modo arquivo
 }
 
 // Função para lidar com a lógica do jogo no modo interativo
 void ModoInterativo(Mesa *mesa) {
+    int aux,aux1,aux2,aux3,origem,destino,qtd;
+
     int opcao;
     do {
         // Exiba o estado atual da mesa do jogo
@@ -29,7 +32,59 @@ void ModoInterativo(Mesa *mesa) {
         printf("Opcao: ");
         scanf("%d", &opcao);
 
-        // Implemente a lógica para cada opção escolhida pelo jogador
+        switch (opcao) {
+            case 1: 
+            compra_carta(&mesa->baralho);
+            break;
+
+
+            case 2:
+            Descarte_para_bases(mesa);
+            break;
+
+
+            case 3:
+            printf("Para qual coluna deseja mover? ");
+            scanf("%d",&aux);
+            Descarte_para_tableau(mesa, aux);
+            break;
+
+
+            case 4:
+            printf("De qual coluna deseja mover?");
+            scanf("%d",&aux);
+            Mover_tableau_bases(mesa,aux);
+            break;
+
+
+            case 5:
+            printf("De qual base deve ser retirado?");
+            scanf("%d",&aux1);
+            printf("Para qual coluna deve ir?");
+            scanf("%d",&aux2);
+            Mover_bases_tableau(mesa,aux1,aux2);
+            break;
+
+
+            case 6:
+            printf("Qual a quantidade de cartas?");
+            scanf("%d",&qtd);
+            printf("De qual coluna deseja retirar?");
+            scanf("%d",&origem);
+            printf("Para qual coluna deseja mover?");
+            scanf("%d",&destino);
+            Mover_entre_colunas(mesa,origem,destino,qtd);
+            break;
+            case 7:
+            printf("O programa foi encerrado.\n");
+            break;
+
+
+            default:
+            printf("Opção inválida. Tente novamente.\n");
+            break;
+    }
+
 
     } while (opcao != 7 && !verificar_vitoria(mesa));
 

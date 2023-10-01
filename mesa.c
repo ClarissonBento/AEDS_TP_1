@@ -26,7 +26,7 @@ void CarregarBaralho_aleatorio(Mesa *mesa) {
     int i = 0;
     for (int naipe = COPAS; naipe <= PAUS; naipe++) {
         for (ValorCarta valor = AS; valor <= K; valor++) {
-            Carta__cria(&carta, naipe, valor, CIMA); // Cria uma carta com o naipe, valor e posição
+            Carta__cria(&carta, naipe, valor, BAIXO); // Cria uma carta com o naipe, valor e posição
             Topo__adiciona(&baralho, &carta); // Adiciona a carta ao baralho
         }
     }
@@ -56,7 +56,7 @@ void CarregarBaralho(Lista_cartas *lista, Carta *cartas, int num_cartas) {
 }
 
 void preparar(Mesa *mesa) {
-    int num_cartas_coluna = 1;
+    int num_cartas_coluna = 0;
 
     CarregarBaralho_aleatorio(mesa);
     Lista_cartas *baralho = &(mesa->baralho);
@@ -76,8 +76,12 @@ void preparar(Mesa *mesa) {
             Topo__remove(baralho,&c);
             Topo__adiciona(coluna_tableau, &c);
             num_cartas_coluna++;
+            
         }
     }
+   
+    
+
 }
 
 int verificar_vitoria(Mesa *mesa) {
@@ -106,9 +110,9 @@ void exibir_mesa(Mesa *mesa) {
     ListaCartas__exibe(&(mesa->baralho));
     printf("\n");
 
-    printf("DESCARTE\n");
+   /* printf("DESCARTE\n");
     ListaCartas__exibe(&(mesa->descarte));
-    printf("\n");
+    printf("\n");*/
 
     printf("COLUNAS DO TABLEAU:\n");
     for (int i = 0; i < 7; i++) {
