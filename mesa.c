@@ -56,7 +56,7 @@ void CarregarBaralho(Lista_cartas *lista, Carta *cartas, int num_cartas) {
 }
 
 void preparar(Mesa *mesa) {
-    int num_cartas_coluna = 0; // Inicializado com 0
+    int num_cartas_coluna;
 
     CarregarBaralho_aleatorio(mesa);
     Lista_cartas *baralho = &(mesa->baralho);
@@ -70,11 +70,13 @@ void preparar(Mesa *mesa) {
     // Inicialize o tableau
     for (int i = 0; i < 7; i++) {
         Lista_cartas *coluna_tableau = &(mesa->tableau[i]);
+        num_cartas_coluna = 0; // Reinicialize num_cartas_coluna
 
         // Inicialize todas as cartas na coluna com a face para baixo
-        while (num_cartas_coluna < i + 1) { // Corrigido para garantir o número correto de cartas
+        while (num_cartas_coluna <= i + 1) { // Corrigido para garantir o número correto de cartas
             if (taVazia(baralho)) {
-                break; // Verifique se há cartas suficientes no baralho
+                printf("Baralho vazio. Não há cartas suficientes para o tableau.\n");
+                return; // Encerre a função se o baralho estiver vazio
             }
 
             Carta c;
@@ -119,7 +121,7 @@ void exibir_mesa(Mesa *mesa) {
 
     printf("COLUNAS DO TABLEAU:\n");
     for (int i = 0; i < 7; i++) {
-        printf("COLUNA %d\n", i);
+        printf("COLUNA %d ", i+1);
         Lista_cartas *coluna_tableau = &(mesa->tableau[i]);
         ListaCartas__exibe(coluna_tableau);
         printf("\n");
@@ -127,7 +129,7 @@ void exibir_mesa(Mesa *mesa) {
 
     printf("BASES DO TABLEAU\n");
     for (int i = 0; i < 4; i++) {
-        printf("BASE %d\n", i);
+        printf("BASE %d ", i+1);
         Lista_cartas *base = &(mesa->bases[i]);
         ListaCartas__exibe(base);
         printf("\n");
