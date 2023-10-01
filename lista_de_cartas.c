@@ -143,47 +143,52 @@ inicia uma semente aleatoria com srand(),
 e faz um loop que realiza o embaralhamento usando o algoritmo de Fisher-Yates.
 ----------------------------------------------------------------------------------------*/
 void ListaCartas__embaralha(Lista_cartas *lista) {
-    int quantidade = Tamanho__retorna(lista);
-    if (quantidade <= 1) {
-        return;
+    // Verifica se a lista está vazia ou contém apenas um elemento
+    if (taVazia(lista) || lista->p_Primeiro == lista->p_Ultimo) {
+        return; // Não há nada para embaralhar
     }
 
-    int *indices = (int *)malloc(quantidade * sizeof(int));
-    for (int i = 0; i < quantidade; i++) {
-        indices[i] = i;
-    }
-
-    // Fisher-Yates
+    // Inicializa a semente aleatória com base no tempo atual
     srand(time(NULL));
-    for (int i = quantidade - 1; i > 0; i--) {
+
+    int tamanho = Tamanho__retorna(lista);
+    Apontador atual = lista->p_Primeiro;
+    Apontador ultimo = lista->p_Ultimo;
+
+    // Cria um array temporário para armazenar temporariamente as cartas
+    Carta *cartas = (Carta *)malloc(tamanho * sizeof(Carta));
+    if (cartas == NULL) {
+        fprintf(stderr, "Erro: Falha ao alocar memória para embaralhar as cartas.\n");
+        exit(1); // Tratamento de erro
+    }
+
+    // Copia as cartas da lista para o array temporário
+    int i = 0;
+    while (atual != NULL) {
+        cartas[i] = atual->carta;
+        atual = atual->proximo;
+        i++;
+    }
+
+    // Aplica o algoritmo de Fisher-Yates para embaralhar as cartas no array
+    for (i = tamanho - 1; i > 0; i--) {
         int j = rand() % (i + 1);
-        int temp = indices[i];
-        indices[i] = indices[j];
-        indices[j] = temp;
+        Carta temp = cartas[i];
+        cartas[i] = cartas[j];
+        cartas[j] = temp;
     }
 
-    Celula *cartas_ordenadas = lista->p_Primeiro->proximo;
-    Celula *cartas_embaralhadas = NULL;
-
-    for (int i = 0; i < quantidade; i++) {
-        int indice = indices[i];
-        
-        while (indice > 0 && cartas_ordenadas != NULL) {
-            cartas_ordenadas = cartas_ordenadas->proximo;
-            indice--;
-        }
-
-        if (cartas_ordenadas != NULL) {
-            Celula *nova_celula = (Celula *)malloc(sizeof(Celula));
-            nova_celula->carta = cartas_ordenadas->carta;
-            nova_celula->proximo = cartas_embaralhadas;
-            cartas_embaralhadas = nova_celula;
-        }
+    // Copia as cartas embaralhadas de volta para a lista
+    atual = lista->p_Primeiro;
+    i = 0;
+    while (atual != NULL) {
+        atual->carta = cartas[i];
+        atual = atual->proximo;
+        i++;
     }
 
-    lista->p_Primeiro->proximo = cartas_embaralhadas;
-
-    free(indices);
+    // Libera a memória alocada para o array temporário
+    free(cartas);
 }
 
 void ListaCartas__exibe(Lista_cartas *lista) {
