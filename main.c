@@ -34,7 +34,7 @@ void ModoInterativo(Mesa *mesa) {
 
         switch (opcao) {
             case 1:
-            AUX = compra_carta(&mesa->baralho); 
+            AUX = compra_carta(mesa, &mesa->baralho);
             Topo__adiciona(&(mesa->descarte), &AUX);
             break;
 

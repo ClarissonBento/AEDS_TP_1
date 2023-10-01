@@ -136,7 +136,7 @@ void exibir_mesa(Mesa *mesa) {
 }
 
 //compra de cartas
-Carta compra_carta(Mesa *mesa,Lista_cartas *lista) {
+Carta compra_carta(Mesa *mesa, Lista_cartas *lista) {
     if (taVazia(lista)) {
         printf("Não é possível comprar cartas, pois o baralho acabou.\n");
         //caso o baralho esteja vazio, retornar uma carta nula
