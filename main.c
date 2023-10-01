@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "lista_de_cartas.h"
 #include "mesa.h"
 
@@ -15,6 +17,7 @@ void ModoInterativo(Mesa *mesa) {
     Carta AUX;
 
     int opcao;
+
     do {
         exibir_mesa(mesa);
         
@@ -36,20 +39,20 @@ void ModoInterativo(Mesa *mesa) {
             break;
 
             case 2:
-            Descarte_para_bases(mesa);
-            break;
+                Descarte_para_bases(mesa);
+                break;
 
             case 3:
-            printf("Para qual coluna deseja mover? ");
-            scanf("%d",&aux);
-            Descarte_para_tableau(mesa, aux);
-            break;
+                printf("Para qual coluna deseja mover? ");
+                scanf("%d", &destino);
+                Descarte_para_tableau(mesa, destino - 1); 
+                break;
 
             case 4:
-            printf("De qual coluna deseja mover?");
-            scanf("%d",&aux);
-            Mover_tableau_bases(mesa,aux);
-            break;
+                printf("De qual coluna deseja mover? ");
+                scanf("%d", &origem);
+                Mover_tableau_bases(mesa, origem - 1);
+                break;
 
             case 5:
             printf("De qual base deve ser retirado?");
@@ -60,23 +63,23 @@ void ModoInterativo(Mesa *mesa) {
             break;
 
             case 6:
-            printf("Qual a quantidade de cartas?");
-            scanf("%d",&qtd);
-            printf("De qual coluna deseja retirar?");
-            scanf("%d",&origem);
-            printf("Para qual coluna deseja mover?");
-            scanf("%d",&destino);
-            Mover_entre_colunas(mesa,origem,destino,qtd);
-            break;
+                printf("Qual a quantidade de cartas? ");
+                scanf("%d", &qtd);
+                printf("De qual coluna deseja retirar? ");
+                scanf("%d", &origem);
+                printf("Para qual coluna deseja mover? ");
+                scanf("%d", &destino);
+                Mover_entre_colunas(mesa, origem - 1, destino - 1, qtd);
+                break;
+
             case 7:
-            printf("O programa foi encerrado.\n");
-            break;
+                printf("O programa foi encerrado.\n");
+                break;
 
             default:
-            printf("Opção inválida. Tente novamente.\n");
-            break;
-    }
-
+                printf("Opção inválida. Tente novamente.\n");
+                break;
+        }
 
     } while (opcao != 7 && !verificar_vitoria(mesa));
 
@@ -87,7 +90,7 @@ void ModoInterativo(Mesa *mesa) {
     }
 }
 
-// Função principal
+
 int main() {
 
     srand(time(NULL));
@@ -101,7 +104,7 @@ int main() {
     scanf("%d", &modo);
 
     if (modo == 1) {
-        // Modo interativo
+        
         ModoInterativo(&mesa);
     } else if (modo == 2) {
         // Modo arquivo 
