@@ -37,11 +37,9 @@ void ModoInterativo(Mesa *mesa) {
             compra_carta(&mesa->baralho);
             break;
 
-
             case 2:
             Descarte_para_bases(mesa);
             break;
-
 
             case 3:
             printf("Para qual coluna deseja mover? ");
@@ -49,13 +47,11 @@ void ModoInterativo(Mesa *mesa) {
             Descarte_para_tableau(mesa, aux);
             break;
 
-
             case 4:
             printf("De qual coluna deseja mover?");
             scanf("%d",&aux);
             Mover_tableau_bases(mesa,aux);
             break;
-
 
             case 5:
             printf("De qual base deve ser retirado?");
@@ -64,7 +60,6 @@ void ModoInterativo(Mesa *mesa) {
             scanf("%d",&aux2);
             Mover_bases_tableau(mesa,aux1,aux2);
             break;
-
 
             case 6:
             printf("Qual a quantidade de cartas?");
@@ -78,7 +73,6 @@ void ModoInterativo(Mesa *mesa) {
             case 7:
             printf("O programa foi encerrado.\n");
             break;
-
 
             default:
             printf("Opção inválida. Tente novamente.\n");
