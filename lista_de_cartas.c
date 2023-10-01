@@ -192,11 +192,16 @@ void ListaCartas__embaralha(Lista_cartas *lista) {
 }
 
 void ListaCartas__exibe(Lista_cartas *lista) {
+    if (taVazia(lista)) {
+        printf("A lista de cartas está vazia.\n");
+        return; // Encerre a função se a lista estiver vazia
+    }
+
     Apontador atual = lista->p_Primeiro->proximo;
 
     printf("Cartas na lista:\n");
 
-    while (atual != NULL) {
+    while (atual != lista->p_Ultimo->proximo) { // Verifica se chegou ao final da lista
         Carta__exibe(&atual->carta);
         atual = atual->proximo;
     }

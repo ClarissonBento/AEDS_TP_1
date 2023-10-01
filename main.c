@@ -3,13 +3,13 @@
 #include "mesa.h"
 
 // Função para inicializar o sistema do jogo de Paciência
-void InicializarJogo(Mesa *mesa) {
+//void InicializarJogo(Mesa *mesa) {
     // Inicialize a mesa e o baralho conforme necessário
-    Mesa__Inicializa(mesa);
-    preparar(mesa);
+    //Mesa__Inicializa(mesa);
+    //preparar(mesa);
     // Carregue o baralho aleatoriamente ou a partir de um arquivo
     // Implemente essa parte de acordo com sua escolha de interatividade ou modo arquivo
-}
+//}
 
 // Função para lidar com a lógica do jogo no modo interativo
 void ModoInterativo(Mesa *mesa) {
@@ -96,9 +96,11 @@ int main() {
 
     // Crie uma variável do tipo Mesa para representar o jogo
     Mesa mesa;
+    Mesa__Inicializa(&mesa);
+    preparar(&mesa);
 
     // Inicialize o sistema do jogo de Paciência
-    InicializarJogo(&mesa);
+    // InicializarJogo(&mesa);
 
     int modo;
     printf("Escolha o modo de utilizacao (1 para interativo, 2 para arquivo): ");

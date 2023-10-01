@@ -60,17 +60,17 @@ void preparar(Mesa *mesa) {
     Lista_cartas *baralho = &(mesa->baralho);
 
     // Inicialize bases vazias
-    for (int i = 0; i < 4; i++) {
-        Lista_cartas *bases = &(mesa->bases[i]);
-        ListaVazia__cria(bases);
-    }
+    //for (int i = 0; i < 4; i++) { // Correção aqui, comece em 0, não em 1
+    //    Lista_cartas *bases = &(mesa->bases[i]);
+    //    ListaVazia__cria(bases);
+   // }
 
     // Inicialize o tableau
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < 7; i++) { // Correção aqui, comece em 0, não em 1
         Lista_cartas *coluna_tableau = &(mesa->tableau[i]);
 
         // Distribua as cartas no tableau de acordo com o número da coluna
-        for (int num_cartas_coluna = 0; num_cartas_coluna <= i + 1; num_cartas_coluna++) {
+        for (int num_cartas_coluna = 0; num_cartas_coluna <= i + 1; num_cartas_coluna++) { // Correção aqui, remova o +1
             if (taVazia(baralho)) {
                 printf("Baralho vazio. Não há cartas suficientes para o tableau.\n");
                 return; // Encerre a função se o baralho estiver vazio
@@ -98,7 +98,7 @@ int verificar_vitoria(Mesa *mesa) {
         cartas_base = Tamanho__retorna(base);
         total += cartas_base;
 
-        if (cartas_base != 13) {
+        if (cartas_base != K) {
             printf("A base %d está incompleta (%d cartas).\n", i, cartas_base);
         }
     }
@@ -116,9 +116,9 @@ void exibir_mesa(Mesa *mesa) {
     ListaCartas__exibe(&(mesa->baralho));
     printf("\n");
 
-   /* printf("DESCARTE\n");
+    printf("DESCARTE\n");
     ListaCartas__exibe(&(mesa->descarte));
-    printf("\n");*/
+    printf("\n");
 
     printf("COLUNAS DO TABLEAU:\n");
     for (int i = 0; i < 7; i++) {
@@ -131,8 +131,8 @@ void exibir_mesa(Mesa *mesa) {
     printf("BASES DO TABLEAU\n");
     for (int i = 0; i < 4; i++) {
         printf("BASE %d ", i+1);
-        Lista_cartas *base = &(mesa->bases[i]);
-        ListaCartas__exibe(base);
+        Lista_cartas base = (mesa->bases[i]);
+        ListaCartas__exibe(&base);
         printf("\n");
     }
 

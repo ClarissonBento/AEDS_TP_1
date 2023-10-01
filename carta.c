@@ -78,11 +78,13 @@ Exibe uma carta com naipe e valor se ela estiver virada pra cima,
 se estiver virada pra baixo exibe "Carta Oculta"
 --------------------------------------------------------------------------------------*/
 
-void Carta__exibe(Carta *c){
+void Carta__exibe(Carta *c) {
     char *naipes[] = {"Copas", "Espadas", "Ouros", "Paus"};
-    char *cards[] = {"0","Ás","2","3","4","5","6","7","8","9","10","Valete","Dama","Rei"};
+    char *cards[] = {"Ás", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Valete", "Dama", "Rei"};
 
-    if(c->posicao == CIMA) printf("%s de %s\n", cards[c->valor], naipes[c->naipe]);
-    else printf("Carta oculta\n");
-    
+    if (c->posicao == CIMA) {
+        printf("%s de %s\n", cards[c->valor - 1], naipes[c->naipe]);
+    } else {
+        printf("Carta oculta\n");
+    }
 }
