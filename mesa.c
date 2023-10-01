@@ -59,11 +59,11 @@ void preparar(Mesa *mesa) {
     CarregarBaralho_aleatorio(mesa);
     Lista_cartas *baralho = &(mesa->baralho);
 
-    // Inicialize bases vazias
-    //for (int i = 0; i < 4; i++) { // Correção aqui, comece em 0, não em 1
-    //    Lista_cartas *bases = &(mesa->bases[i]);
-    //    ListaVazia__cria(bases);
-   // }
+   // Inicialize bases vazias
+    for (int i = 0; i < 4; i++) { // Correção aqui, comece em 0, não em 1
+       Lista_cartas *bases = &(mesa->bases[i]);
+       ListaVazia__cria(bases);
+   }
 
     // Inicialize o tableau
     for (int i = 0; i < 7; i++) { // Correção aqui, comece em 0, não em 1
@@ -242,19 +242,23 @@ void Mover_tableau_bases(Mesa *mesa, int indice_tableau) {
     switch (Naipe__retorna(&carta_tableau)) {
         case COPAS:
             base = &(mesa->bases[0]);
+            base->p_Primeiro->carta=carta_tableau;
             break;
         case OUROS:
             base = &(mesa->bases[1]);
+            base->p_Primeiro->carta=carta_tableau;
             break;
         case PAUS:
             base = &(mesa->bases[2]);
+            base->p_Primeiro->carta=carta_tableau;
             break;
         case ESPADAS:
             base = &(mesa->bases[3]);
+            base->p_Primeiro->carta=carta_tableau;
             break;
         default:
             printf("Naipe inválido.\n");
-            return;
+           
     }
 
     // Verificar se a base está vazia ou se a carta pode ser adicionada
