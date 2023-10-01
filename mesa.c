@@ -17,29 +17,20 @@ void Mesa__Inicializa(Mesa *mesa) {
 }
 
 void CarregarBaralho_aleatorio(Mesa *mesa) {
-    Lista_cartas baralho; // Cria uma lista para o baralho
     Carta carta;
 
-    // Inicializa o baralho
-    ListaVazia__cria(&baralho);
+    // Inicializa o baralho na mesa
+    ListaVazia__cria(&mesa->baralho);
 
-    int i = 0;
     for (int naipe = COPAS; naipe <= PAUS; naipe++) {
         for (ValorCarta valor = AS; valor <= K; valor++) {
-            Carta__cria(&carta, naipe, valor, BAIXO); // Cria uma carta com o naipe, valor e posição
-            Topo__adiciona(&baralho, &carta); // Adiciona a carta ao baralho
+            Carta__cria(&carta, naipe, valor, BAIXO);
+            Topo__adiciona(&mesa->baralho, &carta);
         }
     }
 
     // Embaralhando o baralho
-    ListaCartas__embaralha(&baralho);
-
-    // Insere as cartas no baralho da mesa
-    while (!taVazia(&baralho)) {
-        Carta carta = Topo__retorna(&baralho);
-        Topo__adiciona(&mesa->baralho, &carta);
-        Topo__remove(&baralho, &carta);
-    }
+    ListaCartas__embaralha(&mesa->baralho);
 }
 
 void CarregarBaralho(Lista_cartas *lista, Carta *cartas, int num_cartas) {
@@ -60,17 +51,17 @@ void preparar(Mesa *mesa) {
     Lista_cartas *baralho = &(mesa->baralho);
 
     // Inicialize bases vazias
-    //for (int i = 0; i < 4; i++) { // Correção aqui, comece em 0, não em 1
-    //    Lista_cartas *bases = &(mesa->bases[i]);
-    //    ListaVazia__cria(bases);
-   // }
+    for (int i = 0; i < 4; i++) {
+        Lista_cartas *bases = &(mesa->bases[i]);
+        ListaVazia__cria(bases);
+    }
 
     // Inicialize o tableau
-    for (int i = 0; i < 7; i++) { // Correção aqui, comece em 0, não em 1
+    for (int i = 0; i < 7; i++) {
         Lista_cartas *coluna_tableau = &(mesa->tableau[i]);
 
         // Distribua as cartas no tableau de acordo com o número da coluna
-        for (int num_cartas_coluna = 0; num_cartas_coluna <= i + 1; num_cartas_coluna++) { // Correção aqui, remova o +1
+        for (int num_cartas_coluna = 0; num_cartas_coluna <= i+1; num_cartas_coluna++) {
             if (taVazia(baralho)) {
                 printf("Baralho vazio. Não há cartas suficientes para o tableau.\n");
                 return; // Encerre a função se o baralho estiver vazio
@@ -81,7 +72,7 @@ void preparar(Mesa *mesa) {
             Topo__remove(baralho, &c);
 
             // A primeira carta em cada coluna do tableau está virada para cima, o resto para baixo
-            if (num_cartas_coluna == i) {
+            if (num_cartas_coluna == 0) {
                 Posicao__alterar(&c); // Vire a carta para cima
             }
 
@@ -152,6 +143,7 @@ Carta compra_carta(Lista_cartas *lista) {
     } else {
         Carta c = lista->p_Primeiro->carta;
         lista->p_Primeiro = lista->p_Primeiro->proximo;
+        Posicao__alterar(&c);
         return c;
     }
 }

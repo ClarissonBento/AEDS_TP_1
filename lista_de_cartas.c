@@ -145,6 +145,7 @@ e faz um loop que realiza o embaralhamento usando o algoritmo de Fisher-Yates.
 void ListaCartas__embaralha(Lista_cartas *lista) {
     // Verifica se a lista está vazia ou contém apenas um elemento
     if (taVazia(lista) || lista->p_Primeiro == lista->p_Ultimo) {
+        printf("Não há nada para embaralhar\n");
         return; // Não há nada para embaralhar
     }
 
@@ -170,7 +171,6 @@ void ListaCartas__embaralha(Lista_cartas *lista) {
         i++;
     }
 
-    // Aplica o algoritmo de Fisher-Yates para embaralhar as cartas no array
     for (i = tamanho - 1; i > 0; i--) {
         int j = rand() % (i + 1);
         Carta temp = cartas[i];

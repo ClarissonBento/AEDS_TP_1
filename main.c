@@ -3,24 +3,21 @@
 #include "mesa.h"
 
 // Função para inicializar o sistema do jogo de Paciência
-//void InicializarJogo(Mesa *mesa) {
-    // Inicialize a mesa e o baralho conforme necessário
-    //Mesa__Inicializa(mesa);
-    //preparar(mesa);
-    // Carregue o baralho aleatoriamente ou a partir de um arquivo
-    // Implemente essa parte de acordo com sua escolha de interatividade ou modo arquivo
-//}
+void InicializarJogo(Mesa *mesa) {
+    Mesa__Inicializa(mesa);
+    preparar(mesa);
+}
 
 // Função para lidar com a lógica do jogo no modo interativo
 void ModoInterativo(Mesa *mesa) {
-    int aux,aux1,aux2,aux3,origem,destino,qtd;
+    int aux,aux1,origem,destino,qtd;
+
+    Carta AUX;
 
     int opcao;
     do {
-        // Exiba o estado atual da mesa do jogo
         exibir_mesa(mesa);
         
-        // Exiba um menu de opções para o jogador
         printf("\nEscolha uma opcao:\n");
         printf("1. Comprar uma carta\n");
         printf("2. Mover do descarte para as bases\n");
@@ -33,8 +30,9 @@ void ModoInterativo(Mesa *mesa) {
         scanf("%d", &opcao);
 
         switch (opcao) {
-            case 1: 
-            compra_carta(&mesa->baralho);
+            case 1:
+            AUX = compra_carta(&mesa->baralho); 
+            Topo__adiciona(&(mesa->descarte), &AUX);
             break;
 
             case 2:
@@ -55,10 +53,10 @@ void ModoInterativo(Mesa *mesa) {
 
             case 5:
             printf("De qual base deve ser retirado?");
-            scanf("%d",&aux1);
+            scanf("%d",&aux);
             printf("Para qual coluna deve ir?");
-            scanf("%d",&aux2);
-            Mover_bases_tableau(mesa,aux1,aux2);
+            scanf("%d",&aux1);
+            Mover_bases_tableau(mesa,aux,aux1);
             break;
 
             case 6:
@@ -91,16 +89,12 @@ void ModoInterativo(Mesa *mesa) {
 
 // Função principal
 int main() {
-    // Inicialize a semente para gerar números aleatórios
+
     srand(time(NULL));
 
-    // Crie uma variável do tipo Mesa para representar o jogo
     Mesa mesa;
-    Mesa__Inicializa(&mesa);
-    preparar(&mesa);
 
-    // Inicialize o sistema do jogo de Paciência
-    // InicializarJogo(&mesa);
+    InicializarJogo(&mesa);
 
     int modo;
     printf("Escolha o modo de utilizacao (1 para interativo, 2 para arquivo): ");
@@ -110,8 +104,8 @@ int main() {
         // Modo interativo
         ModoInterativo(&mesa);
     } else if (modo == 2) {
-        // Modo arquivo (implemente conforme necessário)
-        // Carregue o jogo a partir de um arquivo e exiba o estado inicial e final
+        // Modo arquivo 
+        // Carregar o jogo a partir de um arquivo
     } else {
         printf("Modo de utilizacao invalido.\n");
     }
