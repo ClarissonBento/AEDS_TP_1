@@ -77,10 +77,7 @@ void preparar(Mesa *mesa) {
             }
 
             Carta c;
-            
             c = Topo__retorna(baralho);
-            
-            Posicao__alterar(&c); // Vire a carta para cima
             Topo__remove(baralho, &c);
 
             // A primeira carta em cada coluna do tableau está virada para cima, o resto para baixo
@@ -119,9 +116,9 @@ void exibir_mesa(Mesa *mesa) {
     ListaCartas__exibe(&(mesa->baralho));
     printf("\n");
 
-    printf("DESCARTE\n");
+   /* printf("DESCARTE\n");
     ListaCartas__exibe(&(mesa->descarte));
-    printf("\n");
+    printf("\n");*/
 
     printf("COLUNAS DO TABLEAU:\n");
     for (int i = 0; i < 7; i++) {
